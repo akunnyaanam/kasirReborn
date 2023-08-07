@@ -4,7 +4,7 @@
         <div class="sb-sidenav-menu">
             <div class="nav mb-5">
                 <div class="sb-sidenav-menu-heading">Master</div>
-                <a class="nav-link" href="/jenisBarang">
+                <a class="nav-link" href="/dashboard/jenisBarang">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Jenis Barang
                 </a>
