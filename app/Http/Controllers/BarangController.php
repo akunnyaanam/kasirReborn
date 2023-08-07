@@ -30,7 +30,7 @@ class BarangController extends Controller
             $nomer = 'BRG' . $urut;
         }
 
-        return view('barang.index', compact('barang', 'jenisBarang', 'pemasok', 'nomer', 'gudang'), [
+        return view('dashboard.barang.index', compact('barang', 'jenisBarang', 'pemasok', 'nomer', 'gudang'), [
             'title' => "Data Barang",
         ]);
     }
@@ -46,15 +46,18 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $barang = new Barang();
+        
         $barang->kode_barang = $request->input('kode_barang');
-        $barang->kode_jenis = $request->input('kode_jenis');
+        $barang->id_jenis_barang = $request->input('id_jenis_barang');
+        $barang->id_gudang = $request->input('id_gudang');
+        $barang->id_pemasok = $request->input('id_pemasok');
         $barang->nama = $request->input('nama');
-        $barang->kode_pemasok = $request->input('kode_pemasok');
-        $barang->harga = $request->input('harga');
+        $barang->harga_beli = $request->input('harga_beli');
         $barang->harga_jual = $request->input('harga_jual');
-        $barang->kode_gudang = $request->input('kode_gudang');
         $barang->stok = $request->input('stok');
+        
         $barang->save();
+
         return redirect()->back()->with('status', 'Status berhasillll');
     }
 
@@ -85,11 +88,15 @@ class BarangController extends Controller
     {
         $barang_id = $request->input('barang_id');
         $barang = Barang::find($barang_id);
+
         $barang->kode_barang = $request->input('kode_barang');
-        $barang->kode_jenis = $request->input('kode_jenis');
+        $barang->id_jenis_barang = $request->input('id_jenis_barang');
+        $barang->id_pemasok = $request->input('id_pemasok');
+        $barang->id_gudang = $request->input('id_gudang');
         $barang->nama = $request->input('nama');
-        $barang->kode_pemasok = $request->input('kode_pemasok');
-        $barang->harga = $request->input('harga');
+        $barang->harga_beli = $request->input('harga_beli');
+        $barang->harga_jual = $request->input('harga_jual');
+        
         $barang->update();
 
         return redirect()->back()->with('status', 'Updated berhasillll');

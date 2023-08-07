@@ -24,7 +24,7 @@ class PemasokController extends Controller
             $urut = (int)substr($ambil->kode_pemasok, - 5) + 1;
             $nomer = 'PMSK' . $urut;
         }
-        return view('pemasok.index', compact('pemasok', 'nomer') ,[
+        return view('dashboard.pemasok.index', compact('pemasok', 'nomer') ,[
             'title' => 'Data Pemasok'
         ]);
     }

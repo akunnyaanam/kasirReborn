@@ -1,5 +1,7 @@
-@extends('dashboard.layouts.main') @extends('dashboard.layouts.nav')
+@extends('dashboard.layouts.main') 
+@extends('dashboard.layouts.nav')
 @section('container')
+
 {{-- SideNav --}}
 @extends('dashboard.layouts.sidenav')
 
@@ -17,7 +19,7 @@
             <div class="modal-body">
                 <div class="form-group mb-3">
                     <label for="">Kode Jenis Barang</label>
-                    <input type="text" name="kode_jenis_barang" value="{{ $nomer; }}" readonly required class="form-control bg-light">    
+                    <input type="text" name="kode_jenis_barang" value="{{ $nomer }}" readonly required class="form-control bg-light">    
                 </div>    
                 <div class="form-group mb-3">
                     <label for="">Kategori Barang</label>
@@ -95,7 +97,7 @@
 
   <div id="layoutSidenav_content">
     <main>
-        <div class="container-fluid px-4">
+        <div class="container-fluid pt-3">
             @if (session('status'))
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
@@ -132,18 +134,6 @@
             </table>
         </div>
     </main>
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms &amp; Conditions</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 
 @endsection

@@ -20,7 +20,7 @@ class StokgudangController extends Controller
         $barang = Barang::all();
         $gudang = Gudang::all();
 
-        return view('stokGudang.index', compact('barang', 'gudang', 'stokGudang'), [
+        return view('dashboard.stokGudang.index', compact('barang', 'gudang', 'stokGudang'), [
             'title' => "Data Barang",
         ]);
     }

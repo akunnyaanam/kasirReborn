@@ -8,19 +8,19 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Jenis Barang
                 </a>
-                <a class="nav-link" href="/pemasok">
+                <a class="nav-link" href="/dashboard/pemasok">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Pemasok
                 </a>
-                <a class="nav-link" href="/toko">
+                <a class="nav-link" href="/dashboard/toko">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Toko
                 </a>
-                <a class="nav-link" href="/gudang">
+                <a class="nav-link" href="/dashboard/gudang">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Gudang
                 </a>
-                <a class="nav-link" href="/barang">
+                <a class="nav-link" href="/dashboard/barang">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Barang
                 </a>

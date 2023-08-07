@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_gudang');
             $table->string('kode_barang');
             $table->string('nama');
-            $table->integer('harga');
+            $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->integer('stok');
 

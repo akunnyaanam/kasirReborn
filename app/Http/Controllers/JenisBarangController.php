@@ -22,7 +22,7 @@ class JenisBarangController extends Controller
             $urut = (int)substr($ambil->kode_jenis_barang, - 5) + 1;
             $nomer = 'JNBRG' . $urut;
         }
-        return view('jenisBarang.index', compact('jenisBarang', 'nomer') ,[
+        return view('dashboard.jenisBarang.index', compact('jenisBarang', 'nomer') ,[
             'title' => 'Data Jenis Barang'
         ]);
     }

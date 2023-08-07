@@ -24,7 +24,7 @@ class GudangController extends Controller
             $urut = (int)substr($ambil->kode_gudang, - 5) + 1;
             $nomer = 'GDNG' . $urut;
         }
-        return view('gudang.index', compact('gudang', 'nomer') ,[
+        return view('dashboard.gudang.index', compact('gudang', 'nomer') ,[
             'title' => 'Data Gudang'
         ]);
     }

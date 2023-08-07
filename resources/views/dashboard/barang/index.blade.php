@@ -1,5 +1,7 @@
-@extends('dashboard.layouts.main') @extends('dashboard.layouts.nav')
+@extends('dashboard.layouts.main') 
+@extends('dashboard.layouts.nav')
 @section('container')
+
 {{-- SideNav --}}
 @extends('dashboard.layouts.sidenav')
 
@@ -25,7 +27,7 @@
                 </div>    
                 <div class="form-group mb-3">
                     <label for="">Jenis Barang</label>
-                    <select name="kode_jenis" class="form-control">
+                    <select name="id_jenis_barang" class="form-control">
                         <option selected>Pilih Jenis Barang</option>
                         @foreach($jenisBarang as $data)
                             <option value="{{ $data->id }}">{{ $data->kategori_barang }}</option>
@@ -34,7 +36,7 @@
                 </div>    
                 <div class="form-group mb-3">
                     <label for="">Pemasok</label>
-                    <select name="kode_pemasok" class="form-control">
+                    <select name="id_pemasok" class="form-control">
                         <option selected>Pilih Pemasok</option>
                         @foreach($pemasok as $data)
                             <option value="{{ $data->id }}">{{ $data->nama }}</option>
@@ -43,7 +45,7 @@
                 </div>    
                 <div class="form-group mb-3">
                     <label for="">Harga Pemasok</label>
-                    <input type="text" name="harga" required class="form-control">    
+                    <input type="text" name="harga_beli" class="form-control">    
                 </div>
                 <div class="form-group mb-3">
                     <label for="">Harga Jual</label>
@@ -51,7 +53,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="">Gudang</label>
-                    <select name="kode_gudang" class="form-control">
+                    <select name="id_gudang" class="form-control">
                         <option selected>Pilih Gudang</option>
                         @foreach($gudang as $data)
                         <option value="{{ $data->id }}">{{ $data->nama }}</option>
@@ -95,8 +97,17 @@
                     <input type="text" name="nama" id="nama" required class="form-control">    
                 </div>  
                 <div class="form-group mb-3">
+                    <label for="">Gudang</label>
+                    <select name="id_gudang" class="form-control">
+                        <option selected>Pilih Gudang</option>
+                        @foreach($gudang as $data)
+                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>    
+                <div class="form-group mb-3">
                     <label for="">Jenis Barang</label>
-                    <select name="kode_jenis" id="kode_jenis" class="form-control">
+                    <select name="id_jenis_barang" id="id_jenis_barang" class="form-control">
                         @foreach($jenisBarang as $data)
                         <option value="{{ $data->id }}">{{ $data->kategori_barang }}</option>
                         @endforeach
@@ -104,16 +115,20 @@
                 </div>      
                 <div class="form-group mb-3">
                     <label for="">Pemasok</label>
-                    <select name="kode_pemasok" id="kode_pemasok" class="form-control">
+                    <select name="id_pemasok" id="id_pemasok" class="form-control">
                         @foreach($pemasok as $data)
                         <option value="{{ $data->id }}">{{ $data->nama }}</option>
                         @endforeach
                     </select>    
                 </div>    
                 <div class="form-group mb-3">
-                    <label for="">Harga</label>
-                    <input type="text" name="harga" id="harga" required class="form-control">    
-                </div>    
+                    <label for="">Harga Pemasok</label>
+                    <input type="text" name="harga_beli" id="harga_beli" class="form-control">    
+                </div>
+                <div class="form-group mb-3">
+                    <label for="">Harga Jual</label>
+                    <input type="text" name="harga_jual" id="harga_jual" required class="form-control">    
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Update</button>
@@ -154,7 +169,7 @@
 
   <div id="layoutSidenav_content">
     <main>
-        <div class="container-fluid px-4">
+        <div class="container-fluid pt-3">
             @if (session('status'))
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
@@ -188,7 +203,7 @@
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->RjenisBarang->kategori_barang }}</td>
                             <td>{{ $data->RRpemasok->nama }}</td>
-                            <td>{{ $data->harga }}</td>
+                            <td>{{ $data->harga_beli }}</td>
                             <td>{{ $data->harga_jual }}</td>
                             <td>{{ $data->Rgudang->nama }}</td>
                             <td>{{ $data->stok }}</td>
@@ -202,18 +217,6 @@
             </table>
         </div>
     </main>
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms &amp; Conditions</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 
 @endsection
@@ -231,10 +234,12 @@
                     url: "/edit-barang/"+barang_id,
                     success: function (response){
                         $('#kode_barang').val(response.barang.kode_barang);
-                        $('#kode_jenis_barang').val(response.barang.kode_jenis_barang);
+                        $('#id_jenis_barang').val(response.barang.id_jenis_barang);
                         $('#nama').val(response.barang.nama);
-                        $('#kode_pemasok').val(response.barang.kode_pemasok);
-                        $('#harga').val(response.barang.harga);
+                        $('#id_pemasok').val(response.barang.id_pemasok);
+                        $('#id_gudang').val(response.barang.id_gudang);
+                        $('#harga_beli').val(response.barang.harga_beli);
+                        $('#harga_jual').val(response.barang.harga_jual);
                         $('#barang_id').val(barang_id);
                     }
                 });
@@ -248,10 +253,12 @@
                     url: "/edit-barang/"+barang_id,
                     success: function (response){
                         $('#kode_barang').val(response.barang.kode_barang);
-                        $('#kode_jenis_barang').val(response.barang.kode_jenis_barang);
+                        $('#id_jenis_barang').val(response.barang.id_jenis_barang);
                         $('#nama').val(response.barang.nama);
-                        $('#kode_pemasok').val(response.barang.kode_pemasok);
-                        $('#harga').val(response.barang.harga);
+                        $('#id_pemasok').val(response.barang.id_pemasok);
+                        $('#id_gudang').val(response.barang.id_gudang);
+                        $('#harga_beli').val(response.barang.harga_beli);
+                        $('#harga_jual').val(response.barang.harga_jual);
                         $('#barang_id').val(barang_id);
                     }
                 });

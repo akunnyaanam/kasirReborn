@@ -24,7 +24,7 @@ class TokoController extends Controller
             $urut = (int)substr($ambil->kode_toko, - 5) + 1;
             $nomer = 'Tk' . $urut;
         }
-        return view('toko.index', compact('toko', 'nomer') ,[
+        return view('dashboard.toko.index', compact('toko', 'nomer') ,[
             'title' => 'Data Toko'
         ]);
     }
