@@ -561,6 +561,4 @@
             </div>
         </div>
     </main>
-    @extends('dashboard.layouts.footer')
-
 @endsection

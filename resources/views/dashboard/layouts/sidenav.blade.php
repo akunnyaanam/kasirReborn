@@ -2,7 +2,7 @@
 <div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
-            <div class="nav">
+            <div class="nav mb-5">
                 <div class="sb-sidenav-menu-heading">Master</div>
                 <a class="nav-link" href="/jenisBarang">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -37,12 +37,6 @@
                 <a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Laporan Keuangan
-                </a>
-                <div class="sb-sidenav-menu-heading">Setting</div>
-                    <form action="/logout" class="nav-link" method="post">
-                        @csrf
-                        <button type="submit" class="dropdown-item">Logout</button>
-                    </form>
                 </a>
             </div>
         </div>

@@ -6,20 +6,12 @@
     <a class="navbar-brand ps-3" href="/">Dashboard</a>
 \    <!-- Navbar-->
     <ul class="navbar-nav d-none d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                    <form action="/logout" method="post">
-                        @csrf
-                        <button type="submit" class="dropdown-item">Logout</button>
-                    </form>
-                </li>
-            </ul>
-        </li>
+        <div class="nav-item">
+            <form action="{{ route('logout') }}" class="nav-link" method="POST">
+                @csrf
+                <button type="submit" class="nav-link">Logout</button>
+            </form>
+        </div>
     </ul>
 </nav>
 @endsection
