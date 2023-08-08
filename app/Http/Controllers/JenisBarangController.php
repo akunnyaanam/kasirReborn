@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class JenisBarangController extends Controller
@@ -62,9 +63,7 @@ class JenisBarangController extends Controller
 
     public function update(Request $request)
     {
-        $jenis_barang_id = $request->input('jenis_barang_id');
-
-        $jenisBarang = JenisBarang::find($jenis_barang_id);
+        $jenisBarang = JenisBarang::find($request->input('jenis_barang_id'));
 
         // Request tidak ada 
         if (!$jenisBarang) {
@@ -73,7 +72,10 @@ class JenisBarangController extends Controller
 
         // Validasi request
         $validator = Validator::make($request->all(), [
-            'kategori_barang' => 'required|unique:jenis_barangs',
+            'kategori_barang' => [
+                'required',
+                Rule::unique('jenis_barangs')->ignore($request->input('jenis_barang_id')),
+            ],
         ]);
         
         // Jika validasi request gagal
@@ -82,8 +84,10 @@ class JenisBarangController extends Controller
         }
 
         // Record data
-        JenisBarang::where($jenis_barang_id)->update($validator);
-
+        $jenisBarang->update([
+            'kategori_barang' => $request->input('kategori_barang'),
+        ]);
+        
         return redirect()->back()->with('status', 'Updated Successfully');
     }
 

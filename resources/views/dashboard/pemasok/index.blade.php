@@ -170,10 +170,10 @@
                                         <td>{{ $data->alamat }}</td>
                                         <td>{{ $data->no_telp }}</td>
                                         <td>
-                                            <button type="submit" value="{{ $data->id }}" class="btn btn-primary btn-sm"
-                                                id="editbtn">Edit</button>
-                                            <button type="button" value="{{ $data->id }}" class="btn btn-danger btn-sm"
-                                                id="deletebtn">Delete</button>
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                <button type="submit" value="{{ $data->id }}" class="btn btn-warning btn-sm" id="editbtn"><i class="fa-solid fa-pencil "></i></button>
+                                                <button type="button" value="{{ $data->id }}" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa-solid fa-trash"></i></button>
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach

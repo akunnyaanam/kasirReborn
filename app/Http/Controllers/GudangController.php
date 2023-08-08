@@ -15,17 +15,14 @@ class GudangController extends Controller
     public function index()
     {
         $gudang = Gudang::all();
-        $cek = Gudang::count();
-        if($cek == 0){
-            $urut = 10001;
-            $nomer = 'GDNG' . $urut;
-        }else{
-            $ambil = Gudang::all()->last();
-            $urut = (int)substr($ambil->kode_gudang, - 5) + 1;
-            $nomer = 'GDNG' . $urut;
-        }
+
+        $urut = (Gudang::count() == 0)? 10001 : (int)substr(Gudang::all()->last()->kode_gudang, - 5) + 1 ;
+        $nomer = 'GDNG' . $urut;
+
         return view('dashboard.gudang.index', compact('gudang', 'nomer') ,[
-            'title' => 'Data Gudang'
+            'title' => 'Gudang',
+            'desc'=> 'Data gudang',
+            'tableTitle' => 'Data Gudang'
         ]);
     }
 
@@ -42,11 +39,18 @@ class GudangController extends Controller
      */
     public function store(Request $request)
     {
-        $gudang = new Gudang();
-        $gudang->kode_gudang = $request->input('kode_gudang');
-        $gudang->nama = $request->input('nama');
-        $gudang->alamat = $request->input('alamat');
-        $gudang->save();
+        $validatedData = $request->validate([
+            'kode_gudang' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required'
+        ], [
+            'kode_gudang.required' => 'Kode gudang harus diisi.',
+            'nama.required' => 'Nama gudang harus diisi.',
+            'alamat.required' => 'Alamat gudang harus diisi.'
+        ]);
+
+        Gudang::create($validatedData);
+
         return redirect()->back()->with('status', 'Status berhasillll');
     }
 
@@ -75,12 +79,17 @@ class GudangController extends Controller
      */
     public function update(Request $request)
     {
-        $gudang_id = $request->input('gudang_id');
-        $gudang = Gudang::find($gudang_id);
-        $gudang->kode_gudang = $request->input('kode_gudang');
-        $gudang->nama = $request->input('nama');
-        $gudang->alamat = $request->input('alamat');
-        $gudang->update();
+        $validatedData = $request->validate([
+            'kode_gudang' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required'
+        ], [
+            'kode_gudang.required' => 'Kode gudang harus diisi.',
+            'nama.required' => 'Nama gudang harus diisi.',
+            'alamat.required' => 'Alamat gudang harus diisi.'
+        ]);
+
+        Gudang::where('id', $request->input('gudang_id'))->update($validatedData);
 
         return redirect()->back()->with('status', 'Updated berhasillll');
     }

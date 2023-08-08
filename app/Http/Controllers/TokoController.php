@@ -15,17 +15,14 @@ class TokoController extends Controller
     public function index()
     {
         $toko = Toko::all();
-        $cek = Toko::count();
-        if($cek == 0){
-            $urut = 10001;
-            $nomer = 'TK' . $urut;
-        }else{
-            $ambil = Toko::all()->last();
-            $urut = (int)substr($ambil->kode_toko, - 5) + 1;
-            $nomer = 'Tk' . $urut;
-        }
+        
+        $urut = (Toko::count() == 0)? 10001 : (int)substr(Toko::all()->last()->kode_toko, - 5) + 1;
+        $nomer = 'TK' . $urut;
+        
         return view('dashboard.toko.index', compact('toko', 'nomer') ,[
-            'title' => 'Data Toko'
+            'title' => 'Toko',
+            'desc'=> 'Data toko',
+            'tableTitle' => 'Data Toko'
         ]);
     }
 
@@ -42,11 +39,24 @@ class TokoController extends Controller
      */
     public function store(Request $request)
     {
-        $toko = new Toko();
-        $toko->kode_toko = $request->input('kode_toko');
-        $toko->nama = $request->input('nama');
-        $toko->alamat = $request->input('alamat');
-        $toko->save();
+        // $toko = new Toko();
+        // $toko->kode_toko = $request->input('kode_toko');
+        // $toko->nama = $request->input('nama');
+        // $toko->alamat = $request->input('alamat');
+        // $toko->save();
+
+        $validatedData = $request->validate([
+            'kode_toko' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required'
+        ], [
+            'kode_toko.required' => 'Kode toko harus diisi.',
+            'nama.required' => 'Nama toko harus diisi.',
+            'alamat.required' => 'Alamat toko harus diisi.'
+        ]);
+        
+        Toko::create($validatedData);
+
         return redirect()->back()->with('status', 'Status berhasillll');
     }
 
@@ -75,12 +85,17 @@ class TokoController extends Controller
      */
     public function update(Request $request)
     {
-        $toko_id = $request->input('toko_id');
-        $toko = Toko::find($toko_id);
-        $toko->kode_toko = $request->input('kode_toko');
-        $toko->nama = $request->input('nama');
-        $toko->alamat = $request->input('alamat');
-        $toko->update();
+        $validatedData = $request->validate([
+            'kode_toko' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required'
+        ], [
+            'kode_toko.required' => 'Kode toko harus diisi.',
+            'nama.required' => 'Nama toko harus diisi.',
+            'alamat.required' => 'Alamat toko harus diisi.'
+        ]);
+
+        Toko::where('id', $request->input('toko_id'))->update($validatedData);
 
         return redirect()->back()->with('status', 'Updated berhasillll');
     }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pemasok;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\RedirectResponse;
 
 class PemasokController extends Controller
@@ -75,14 +76,15 @@ class PemasokController extends Controller
      */
     public function update(Request $request)
     {
-        $pemasok_id = $request->input('pemasok_id');
-        $pemasok = Pemasok::find($pemasok_id);
-
         $validatedData = $request->validate([
             'kode_pemasok' => 'required',
             'nama' => 'required',
             'alamat' => 'required',
-            'no_telp' => 'required|unique:pemasoks|digits_between:10,13'
+            'no_telp' => [
+                'required',
+                Rule::unique('pemasoks')->ignore($request->input('pemasok_id')),
+                'digits_between:10,13'
+            ]
         ], [
             'kode_pemasok.required' => 'Kode pemasok harus diisi.',
             'nama.required' => 'Nama pemasok harus diisi.',
@@ -92,7 +94,7 @@ class PemasokController extends Controller
             'no_telp.digits_between' => 'Nomor telepon pemasok harus memiliki panjang antara 10 dan 13 digit.'
         ]);
 
-        Pemasok::where('id', $pemasok_id)->update($validatedData);
+        Pemasok::where('id', $request->input('pemasok_id'))->update($validatedData);
 
         return redirect()->back()->with('status', 'Updated berhasillll');
     }
