@@ -25,7 +25,7 @@ class JenisBarangController extends Controller
         //     $nomer = 'JNBRG' . $urut;
         // }
 
-        $jenisBarang = JenisBarang::paginate(10);;
+        $jenisBarang = JenisBarang::all();;
         $urut = JenisBarang::count() == 0 ? 10001 : (int)substr(JenisBarang::all()->last()->kode_jenis_barang, -5) + 1;
         $nomer = 'JNBRG' . $urut;
         

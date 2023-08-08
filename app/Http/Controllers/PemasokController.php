@@ -25,7 +25,9 @@ class PemasokController extends Controller
             $nomer = 'PMSK' . $urut;
         }
         return view('dashboard.pemasok.index', compact('pemasok', 'nomer') ,[
-            'title' => 'Data Pemasok'
+            'title' => 'Pemasok',
+            'desc' => 'Data-data pemasok',
+            'tableTitle' => 'Data pemasok'
         ]);
     }
 

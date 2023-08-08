@@ -157,7 +157,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $jenisBarang->links() }}
                         </div>
                         <div class="card-footer d-flex justify-content-end">
                             <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal">
