@@ -118,7 +118,5 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Tembalang',
         ]);
 
-        
-
     }
 }

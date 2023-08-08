@@ -97,42 +97,77 @@
 
   <div id="layoutSidenav_content">
     <main>
-        <div class="container-fluid pt-3">
-            @if (session('status'))
-                <div class="alert alert-success">{{ session('status') }}</div>
-            @endif
-            <h1 class="my-4 text-center">Kategori Barang</h1>
-            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Tambah Jenis Barang
-            </button>
-
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Kode Jenis Barang</th>
-                        <th>Kategori Barang</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($jenisBarang as $data)
-                        <tr>
-                            <td>{{ $i++; }}</td>
-                            <td>{{ $data->kode_jenis_barang }}</td>
-                            <td>{{ $data->kategori_barang }}</td>
-                            <td>
-                                <button type="submit" value="{{ $data->id }}" class="btn btn-primary btn-sm" id="editbtn">Edit</button>
-                                <button type="button" value="{{ $data->id }}" class="btn btn-danger btn-sm" id="deletebtn">Delete</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 pt-3">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-5">
+                            <h1 class="mt-4">{{ $title }}</h1>
+                            <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item active">{{ $desc }}</li>
+                            </ol>                
+                            <br>
+                        </div>
+                        <div class="col-lg-5">
+                            @if (session('status'))
+                            <div class="alert alert-success p-2 text-center">{{ session('status') }}</div>
+                            @endif
+                            @if($errors->any())
+                            <div class="alert alert-danger p-2 text-center">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif            
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            {{ $tableTitle }}
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th>Kode Jenis Barang</th>
+                                        <th>Kategori Barang</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($jenisBarang as $data)
+                                        <tr>
+                                            <td class="text-center">{{ $i++; }}</td>
+                                            <td>{{ $data->kode_jenis_barang }}</td>
+                                            <td>{{ $data->kategori_barang }}</td>
+                                            <td class="text-center">
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="submit" value="{{ $data->id }}" class="btn btn-warning btn-sm" id="editbtn"><i class="fa-solid fa-pencil "></i></button>
+                                                    <button type="button" value="{{ $data->id }}" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa-solid fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $jenisBarang->links() }}
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa-regular fa-square-plus"></i> Tambah Jenis Barang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
     </main>
 </div>
 
