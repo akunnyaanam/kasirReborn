@@ -82,10 +82,8 @@ class JenisBarangController extends Controller
         }
 
         // Record data
-        $jenisBarang->kode_jenis_barang = $request->input('kode_jenis_barang');
-        $jenisBarang->kategori_barang = $request->input('kategori_barang');
-        $jenisBarang->update();
-    
+        JenisBarang::where($jenis_barang_id)->update($validator);
+
         return redirect()->back()->with('status', 'Updated Successfully');
     }
 

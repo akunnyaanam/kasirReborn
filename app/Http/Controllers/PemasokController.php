@@ -15,15 +15,10 @@ class PemasokController extends Controller
     public function index()
     {
         $pemasok = Pemasok::all();
-        $cek = Pemasok::count();
-        if($cek == 0){
-            $urut = 10001;
-            $nomer = 'PMSK' . $urut;
-        }else{
-            $ambil = Pemasok::all()->last();
-            $urut = (int)substr($ambil->kode_pemasok, - 5) + 1;
-            $nomer = 'PMSK' . $urut;
-        }
+
+        $urut = (Pemasok::count() == 0)? 10001 : (int)substr(Pemasok::all()->last()->kode_pemasok, - 5) + 1;
+        $nomer = 'PMSK' . $urut;
+
         return view('dashboard.pemasok.index', compact('pemasok', 'nomer') ,[
             'title' => 'Pemasok',
             'desc' => 'Data-data pemasok',
@@ -32,25 +27,27 @@ class PemasokController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $pemasok = new Pemasok();
-        $pemasok->kode_pemasok = $request->input('kode_pemasok');
-        $pemasok->nama = $request->input('nama');
-        $pemasok->alamat = $request->input('alamat');
-        $pemasok->no_telp = $request->input('no_telp');
-        $pemasok->save();
-        return redirect()->back()->with('status', 'Status berhasillll');
+        $validatedData = $request->validate([
+            'kode_pemasok' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required|unique:pemasoks|digits_between:10,13'
+        ], [
+            'kode_pemasok.required' => 'Kode pemasok harus diisi.',
+            'nama.required' => 'Nama pemasok harus diisi.',
+            'alamat.required' => 'Alamat pemasok harus diisi.',
+            'no_telp.required' => 'Nomor telepon pemasok harus diisi.',
+            'no_telp.unique' => 'Nomor telepon pemasok sudah ada dalam database.',
+            'no_telp.digits_between' => 'Nomor telepon pemasok harus memiliki panjang antara 10 dan 13 digit.'
+        ]);
+
+        Pemasok::create($validatedData);
+
+        return redirect()->back()->with('status', 'Data berhasil ditambahkan.');
     }
 
     /**
@@ -80,11 +77,22 @@ class PemasokController extends Controller
     {
         $pemasok_id = $request->input('pemasok_id');
         $pemasok = Pemasok::find($pemasok_id);
-        $pemasok->kode_pemasok = $request->input('kode_pemasok');
-        $pemasok->nama = $request->input('nama');
-        $pemasok->alamat = $request->input('alamat');
-        $pemasok->no_telp = $request->input('no_telp');
-        $pemasok->update();
+
+        $validatedData = $request->validate([
+            'kode_pemasok' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required|unique:pemasoks|digits_between:10,13'
+        ], [
+            'kode_pemasok.required' => 'Kode pemasok harus diisi.',
+            'nama.required' => 'Nama pemasok harus diisi.',
+            'alamat.required' => 'Alamat pemasok harus diisi.',
+            'no_telp.required' => 'Nomor telepon pemasok harus diisi.',
+            'no_telp.unique' => 'Nomor telepon pemasok sudah ada dalam database.',
+            'no_telp.digits_between' => 'Nomor telepon pemasok harus memiliki panjang antara 10 dan 13 digit.'
+        ]);
+
+        Pemasok::where('id', $pemasok_id)->update($validatedData);
 
         return redirect()->back()->with('status', 'Updated berhasillll');
     }
