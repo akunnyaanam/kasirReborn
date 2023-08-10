@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('stok_gudangs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('id_barang');
             $table->unsignedBigInteger('id_gudang');
-            $table->integer('stok');
+            $table->unsignedBigInteger('id_barang');
+            $table->integer('stok_gudang');
 
-            $table->foreign('id_barang')->references('id')->on('barangs')->onDelete('cascade');
-            $table->foreign('id_gudang')->references('id')->on('gudangs')->onDelete('cascade');
+            $table->foreign('id_gudang')->references('id')->on('gudangs');
+            $table->foreign('id_barang')->references('id')->on('barangs');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stok_gudangs');
+        Schema::dropIfExists('stok_gudang');
     }
 };

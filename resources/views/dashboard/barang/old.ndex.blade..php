@@ -52,6 +52,32 @@
                         <label for="">Harga Jual</label>
                         <input type="text" name="harga_jual" required class="form-control">
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="">Gudang</label>
+                        <select name="id_gudang" class="form-control">
+                            <option selected>Pilih Gudang</option>
+                            @foreach($gudang as $data)
+                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Stok Gudang</label>
+                        <input type="text" name="stok_gudang" required class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Toko</label>
+                        <select name="id_gudang" class="form-control">
+                            <option selected>Pilih Toko</option>
+                            @foreach($toko as $data)
+                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Stok Toko</label>
+                        <input type="text" name="stok_toko" required class="form-control">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save changes</button>
@@ -86,6 +112,15 @@
                         <input type="text" name="nama" id="nama" required class="form-control">
                     </div>
                     <div class="form-group mb-3">
+                        <label for="">Gudang</label>
+                        <select name="id_gudang" class="form-control">
+                            <option selected>Pilih Gudang</option>
+                            @foreach($gudang as $data)
+                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="">Jenis Barang</label>
                         <select name="id_jenis_barang" id="id_jenis_barang" class="form-control">
                             @foreach($jenisBarang as $data)
@@ -102,7 +137,7 @@
                         </select>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="">Harga Beli</label>
+                        <label for="">Harga Pemasok</label>
                         <input type="text" name="harga_beli" id="harga_beli" class="form-control">
                     </div>
                     <div class="form-group mb-3">
@@ -189,8 +224,11 @@
                                         <th>Nama Barang</th>
                                         <th>Jenis Barang</th>
                                         <th>Pemasok</th>
-                                        <th>Harga Beli</th>
+                                        <th>Harga Pemasok</th>
                                         <th>Harga Jual</th>
+                                        <th>Gudang</th>
+                                        <th>Stok Gudang</th>
+                                        <th>Stok Toko</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -207,6 +245,9 @@
                                         <td>{{ $data->RRpemasok->nama }}</td>
                                         <td>{{ $data->harga_beli }}</td>
                                         <td>{{ $data->harga_jual }}</td>
+                                        <td>{{ $data->Rgudang->nama }}</td>
+                                        <td>{{ $data->Rstok_gudang->stok_gudang }}</td>
+                                        <td>{{ $data->Rstok_toko->stok_toko }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group"
                                                 aria-label="Small button group">
@@ -217,6 +258,9 @@
                                                     class="btn btn-danger btn-sm" id="deletebtn"><i
                                                         class="fa-solid fa-trash"></i></button>
                                             </div>
+                                            <a href="/dashboard/gudang/{{ $data->id }}" class="btn btn-info btn-sm">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach

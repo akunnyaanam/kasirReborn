@@ -28,6 +28,18 @@ class Barang extends Model
     {
         return $this->belongsTo(Gudang::class, 'id_gudang');
     }
+    public function Rstokgudang()
+    {
+        return $this->hasOne(StokGudang::class, 'id_stok_gudang');
+    }
+    public function Rtoko()
+    {
+        return $this->belongsTo(Toko::class, 'id_toko');
+    }
+    public function Rstoktoko()
+    {
+        return $this->hasOne(StokToko::class, 'id_stok_toko');
+    }
 
     public function RRpemasok()
     {

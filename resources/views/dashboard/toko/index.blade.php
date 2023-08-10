@@ -175,7 +175,7 @@
                         </div>
                         <div class="card-footer d-flex justify-content-end">
                             <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fa-regular fa-square-plus"></i> Tambah Jenis Barang
+                                <i class="fa-regular fa-square-plus"></i> Tambah Toko
                             </button>
                         </div>
                     </div>

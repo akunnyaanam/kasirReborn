@@ -10,25 +10,47 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Tambah Barang</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ url('add-gudang') }}" method="POST">
+            <form action="{{ url('add-barang') }}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-group mb-3">
-                        <label for="">Kode Gudang</label>
-                        <input type="text" name="kode_gudang" required value="{{ $nomer }}" readonly
-                            class="form-control bg-light">
-                    </div>
+                    {{-- <div class="form-group mb-3">
+                        <label for="">Kode Barang</label>
+                        <input type="text" name="kode_barang" readonly required class="form-control bg-light"
+                            value="{{ $nomer; }}">
+                    </div> --}}
                     <div class="form-group mb-3">
                         <label for="">Nama</label>
                         <input type="text" name="nama" required class="form-control">
                     </div>
+                    {{-- <div class="form-group mb-3">
+                        <label for="">Jenis Barang</label>
+                        <select name="id_jenis_barang" class="form-control">
+                            <option selected>Pilih Jenis Barang</option>
+                            @foreach($jenisBarang as $data)
+                            <option value="{{ $data->id }}">{{ $data->kategori_barang }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    {{-- <div class="form-group mb-3">
+                        <label for="">Pemasok</label>
+                        <select name="id_pemasok" class="form-control">
+                            <option selected>Pilih Pemasok</option>
+                            @foreach($pemasok as $data)
+                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
                     <div class="form-group mb-3">
-                        <label for="">Alamat</label>
-                        <input type="text" name="alamat" required class="form-control">
+                        <label for="">Harga Pemasok</label>
+                        <input type="text" name="harga_beli" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Harga Jual</label>
+                        <input type="text" name="harga_jual" required class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -45,27 +67,47 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Data</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ url('update-gudang') }}" method="POST">
+            <form action="{{ url('update-barang') }}" method="POST">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="gudang_id" id="gudang_id">
+                <input type="hidden" name="barang_id" id="barang_id">
                 <div class="modal-body">
                     <div class="form-group mb-3">
-                        <label for="">Kode Gudang</label>
-                        <input type="text" name="kode_gudang" id="kode_gudang" readonly required
+                        <label for="">Kode Barang</label>
+                        <input type="text" name="kode_barang" id="kode_barang" readonly required
                             class="form-control bg-light">
                     </div>
                     <div class="form-group mb-3">
                         <label for="">Nama</label>
                         <input type="text" name="nama" id="nama" required class="form-control">
                     </div>
+                    {{-- <div class="form-group mb-3">
+                        <label for="">Jenis Barang</label>
+                        <select name="id_jenis_barang" id="id_jenis_barang" class="form-control">
+                            @foreach($jenisBarang as $data)
+                            <option value="{{ $data->id }}">{{ $data->kategori_barang }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group mb-3">
-                        <label for="">Alamat</label>
-                        <input type="text" name="alamat" id="alamat" required class="form-control">
+                        <label for="">Pemasok</label>
+                        <select name="id_pemasok" id="id_pemasok" class="form-control">
+                            @foreach($pemasok as $data)
+                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    <div class="form-group mb-3">
+                        <label for="">Harga Beli</label>
+                        <input type="text" name="harga_beli" id="harga_beli" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Harga Jual</label>
+                        <input type="text" name="harga_jual" id="harga_jual" required class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -84,11 +126,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Hapus Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ url('delete-gudang') }}" method="POST">
+            <form action="{{ url('delete-barang') }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <h5 class="my-3 ms-3">Yakin Ingin Dihapus?</h5>
@@ -143,9 +185,12 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Gudang</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Jenis Barang</th>
+                                        <th>Pemasok</th>
+                                        <th>Harga Beli</th>
+                                        <th>Harga Jual</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -153,30 +198,36 @@
                                     @php
                                     $i = 1;
                                     @endphp
-                                    @foreach ($gudang as $data)
+                                    @forelse ($barangsInGudang as $data)
                                     <tr>
                                         <td>{{ $i++; }}</td>
-                                        <td>{{ $data->kode_gudang }}</td>
+                                        <td>{{ $data->kode_barang }}</td>
                                         <td>{{ $data->nama }}</td>
-                                        <td>{{ $data->alamat }}</td>
+                                        <td>{{ $data->RjenisBarang->kategori_barang }}</td>
+                                        <td>{{ $data->RRpemasok->nama }}</td>
+                                        <td>{{ $data->harga_beli }}</td>
+                                        <td>{{ $data->harga_jual }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group"
                                                 aria-label="Small button group">
-                                                <button type="submit" value="{{ $data->id }}" class="btn btn-warning btn-sm" id="editbtn"><i class="fa-solid fa-pencil "></i></button>
-                                                <button type="button" value="{{ $data->id }}" class="btn btn-danger btn-sm" id="deletebtn"><i  class="fa-solid fa-trash"></i></button>
+                                                <button type="submit" value="{{ $data->id }}"
+                                                    class="btn btn-warning btn-sm" id="editbtn"><i
+                                                        class="fa-solid fa-pencil "></i></button>
+                                                <button type="button" value="{{ $data->id }}"
+                                                    class="btn btn-danger btn-sm"><i
+                                                        class="fa-solid fa-trash"></i></button>
                                             </div>
-                                            <a href="/dashboard/gudang/{{ $data->id }}" class="btn btn-info btn-sm">
-                                                <i class="fa-solid fa-eye"></i>
-                                            </a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fa-regular fa-square-plus"></i> Tambah Gudang
+                            <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class="fa-regular fa-square-plus"></i> Tambah Barang
                             </button>
                         </div>
                     </div>
@@ -192,33 +243,41 @@
 <script>
     $(document).ready(function () {
         $(document).on('click', '#deletebtn', function () {
-            var gudang_id = $(this).val();
+            var barang_id = $(this).val();
             $('#deleteModal').modal('show');
-            $('#deleting_id').val(gudang_id);
+            $('#deleting_id').val(barang_id);
 
             $.ajax({
                 type: "GET",
-                url: "/edit-gudang/" + gudang_id,
+                url: "/edit-barang/" + barang_id,
                 success: function (response) {
-                    $('#kode_gudang').val(response.gudang.kode_gudang);
-                    $('#nama').val(response.gudang.nama);
-                    $('#alamat').val(response.gudang.alamat);
-                    $('#gudang_id').val(gudang_id);
+                    $('#kode_barang').val(response.barang.kode_barang);
+                    $('#id_jenis_barang').val(response.barang.id_jenis_barang);
+                    $('#nama').val(response.barang.nama);
+                    $('#id_pemasok').val(response.barang.id_pemasok);
+                    $('#id_gudang').val(response.barang.id_gudang);
+                    $('#harga_beli').val(response.barang.harga_beli);
+                    $('#harga_jual').val(response.barang.harga_jual);
+                    $('#barang_id').val(barang_id);
                 }
             });
         });
         $(document).on('click', '#editbtn', function () {
-            var gudang_id = $(this).val();
+            var barang_id = $(this).val();
             $('#editModal').modal('show');
 
             $.ajax({
                 type: "GET",
-                url: "/edit-gudang/" + gudang_id,
+                url: "/edit-barang/" + barang_id,
                 success: function (response) {
-                    $('#kode_gudang').val(response.gudang.kode_gudang);
-                    $('#nama').val(response.gudang.nama);
-                    $('#alamat').val(response.gudang.alamat);
-                    $('#gudang_id').val(gudang_id);
+                    $('#kode_barang').val(response.barang.kode_barang);
+                    $('#id_jenis_barang').val(response.barang.id_jenis_barang);
+                    $('#nama').val(response.barang.nama);
+                    $('#id_pemasok').val(response.barang.id_pemasok);
+                    $('#id_gudang').val(response.barang.id_gudang);
+                    $('#harga_beli').val(response.barang.harga_beli);
+                    $('#harga_jual').val(response.barang.harga_jual);
+                    $('#barang_id').val(barang_id);
                 }
             });
         });

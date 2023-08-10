@@ -16,16 +16,17 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('id_jenis_barang');
             $table->unsignedBigInteger('id_pemasok');
-            $table->unsignedBigInteger('id_gudang');
+            $table->unsignedBigInteger('id_gudang')->nullable();
+            $table->unsignedBigInteger('id_toko')->nullable();
             $table->string('kode_barang');
             $table->string('nama');
             $table->integer('harga_beli');
-            $table->integer('harga_jual');
-            $table->integer('stok');
+            $table->integer('harga_jual')->nullable();
 
-            $table->foreign('id_jenis_barang')->references('id')->on('jenis_barangs')->onDelete('cascade');
-            $table->foreign('id_pemasok')->references('id')->on('pemasoks')->onDelete('cascade');
-            $table->foreign('id_gudang')->references('id')->on('gudangs')->onDelete('cascade');
+            $table->foreign('id_jenis_barang')->references('id')->on('jenis_barangs');
+            $table->foreign('id_pemasok')->references('id')->on('pemasoks');
+            $table->foreign('id_gudang')->references('id')->on('gudangs');
+            $table->foreign('id_toko')->references('id')->on('tokos');
         });
     }
 

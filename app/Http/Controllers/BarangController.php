@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Toko;
 use App\Models\Barang;
 use App\Models\Gudang;
-use App\Models\JenisBarang;
 use App\Models\Pemasok;
-use App\Models\StokGudang;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\StokGudang;
+use App\Models\JenisBarang;
+use App\Models\StokToko;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class BarangController extends Controller
@@ -19,6 +21,9 @@ class BarangController extends Controller
         $jenisBarang = JenisBarang::all();
         $pemasok = Pemasok::all();
         $gudang = Gudang::all();
+        $stokgudang = StokGudang::all();
+        $toko = Toko::all();
+        $stoktoko = StokToko::all();
 
         $cek = Barang::count();
         if($cek == 0){
@@ -30,8 +35,10 @@ class BarangController extends Controller
             $nomer = 'BRG' . $urut;
         }
 
-        return view('dashboard.barang.index', compact('barang', 'jenisBarang', 'pemasok', 'nomer', 'gudang'), [
-            'title' => "Data Barang",
+        return view('dashboard.barang.index', compact('barang', 'jenisBarang', 'pemasok', 'nomer', 'gudang', 'stokgudang', 'toko', 'stoktoko'), [
+            'title' => "Barang",
+            'desc' => 'Data barang',
+            'tableTitle' => 'Data Barang'
         ]);
     }
 
@@ -54,7 +61,6 @@ class BarangController extends Controller
         $barang->nama = $request->input('nama');
         $barang->harga_beli = $request->input('harga_beli');
         $barang->harga_jual = $request->input('harga_jual');
-        $barang->stok = $request->input('stok');
         
         $barang->save();
 

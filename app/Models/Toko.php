@@ -13,4 +13,14 @@ class Toko extends Model
         'nama',
         'alamat'
     ];
+
+    public function Rgudang()
+    {
+        return $this->hasOne(Toko::class);
+    }
+    public function Rbarang()
+    {
+        return $this->hasOne(Toko::class);
+    }
+
 }

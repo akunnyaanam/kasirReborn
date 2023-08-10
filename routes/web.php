@@ -61,11 +61,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-barang/{id}', [BarangController::class, 'edit']);
     Route::put('/update-barang', [BarangController::class, 'update']);
     Route::delete('/delete-barang', [BarangController::class, 'destroy']);
+
+    Route::get('/dashboard/gudang/{id}', [GudangController::class, 'gudangBarang']);
     
-    Route::get('/dashboard/stokGudang', [StokgudangController::class, 'index']);
-    Route::post('/add-stokGudang', [StokgudangController::class, 'store']);
-    Route::get('/edit-stokGudang/{id}', [StokgudangController::class, 'edit']);
-    Route::put('/update-stokGudang', [StokgudangController::class, 'update']);
-    Route::delete('/delete-stokGudang', [StokgudangController::class, 'destroy']);
+    // Route::get('/dashboard/stokGudang', [StokgudangController::class, 'index']);
+    // Route::post('/add-stokGudang', [StokgudangController::class, 'store']);
+    // Route::get('/edit-stokGudang/{id}', [StokgudangController::class, 'edit']);
+    // Route::put('/update-stokGudang', [StokgudangController::class, 'update']);
+    // Route::delete('/delete-stokGudang', [StokgudangController::class, 'destroy']);
 });
 

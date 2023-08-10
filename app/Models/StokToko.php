@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StokGudang extends Model
+class StokToko extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'id_barang',
-        'id_gudang',
-        'stok_gudang'
+        'id_toko',
+        'stok_toko'
     ];
 
     public function RRstokbarang()
@@ -19,10 +20,9 @@ class StokGudang extends Model
         return $this->belongsTo(Barang::class, 'id_barang');
     }
 
-    public function RRstokgudang()
+    public function RRstoktoko()
     {
-        return $this->hasMany(Gudang::class, 'id_gudang');
+        return $this->hasMany(Toko::class, 'id_toko');
     }
-
 
 }

@@ -12,18 +12,18 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-user"></i></div>
                     Pemasok
                 </a>
-                <a class="nav-link" href="/dashboard/toko">
-                    <div class="sb-nav-link-icon"><i class="fa-solid fa-shop"></i></i></div>
-                    Toko
-                </a>
                 <a class="nav-link" href="/dashboard/gudang">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
                     Gudang
                 </a>
+                <a class="nav-link" href="/dashboard/toko">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-shop"></i></i></div>
+                    Toko
+                </a>
                 <a class="nav-link" href="/dashboard/barang">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
                     Barang
-                </a>
+                </a>                    
                 <div class="sb-sidenav-menu-heading">Transaksi</div>
                 <a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

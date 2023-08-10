@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Gudang;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\StokGudang;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class GudangController extends Controller
@@ -103,5 +105,23 @@ class GudangController extends Controller
         $gudang = Gudang::find($gudang);
         $gudang->delete();
         return redirect()->back()->with('status', 'Delete Berhasil');
+    }
+
+    public function gudangBarang(Request $request, $id)
+    {
+        $gudang = Gudang::all();
+        $stok = StokGudang::all();
+        $barang = Barang::findOrFail($id);
+        $barangsInGudang = $barang->RRstokgudang; // Mengambil stok barang di dalam gudang
+
+        // $urut = (Gudang::count() == 0)? 10001 : (int)substr(Gudang::all()->last()->kode_gudang, - 5) + 1 ;
+        // $nomer = 'GDNG' . $urut;
+
+        return view('dashboard.gudang.barang', compact('barangsInGudang','barang', 'stok') ,[
+            'title' => 'Barang Gudang ' . $id,
+            'desc'=> 'Data barang gudang',
+            'tableTitle' => 'Data barang gudang'
+        ]);
+
     }
 }
