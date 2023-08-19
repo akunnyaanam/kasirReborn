@@ -36,6 +36,16 @@ class GudangController extends Controller
         //
     }
 
+    public function showBarang($gudang_id)
+    {
+        $gudang = Gudang::findOrFail($gudang_id);
+
+        return view('dashboard.stokGudang1.show_barang', compact('gudang'), [
+            'title' => 'Detail Gudang',
+            'tableTitle' => 'Data ' . $gudang->nama
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -54,14 +64,6 @@ class GudangController extends Controller
         Gudang::create($validatedData);
 
         return redirect()->back()->with('status', 'Status berhasillll');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**

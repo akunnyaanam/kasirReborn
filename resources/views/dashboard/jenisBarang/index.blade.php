@@ -139,12 +139,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $i = 1;
-                                    @endphp
                                     @foreach ($jenisBarang as $data)
                                         <tr>
-                                            <td class="text-center">{{ $i++; }}</td>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->kode_jenis_barang }}</td>
                                             <td>{{ $data->kategori_barang }}</td>
                                             <td class="text-center">

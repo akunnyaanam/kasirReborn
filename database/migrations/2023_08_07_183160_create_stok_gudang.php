@@ -12,15 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stok_gudangs', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('gudang_id');
             $table->timestamps();
-            $table->unsignedBigInteger('id_gudang');
-            $table->unsignedBigInteger('id_barang');
-            $table->integer('stok_gudang');
 
-            $table->foreign('id_gudang')->references('id')->on('gudangs');
-            $table->foreign('id_barang')->references('id')->on('barangs');
+            $table->foreign('gudang_id')->references('id')->on('gudangs');
         });
+        
+            // $table->id();
+            // $table->timestamps();
+            // $table->unsignedBigInteger('id_gudang');
+            // $table->unsignedBigInteger('id_barang');
+            // $table->integer('stok_gudang');
+
+            // $table->foreign('id_gudang')->references('id')->on('gudangs');
+            // $table->foreign('id_barang')->references('id')->on('barangs');
     }
 
     /**

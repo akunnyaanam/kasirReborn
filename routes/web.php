@@ -9,6 +9,7 @@ use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StokgudangController;
 use App\Http\Controllers\JenisBarangController;
+use App\Http\Controllers\MutasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,13 +62,41 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-barang/{id}', [BarangController::class, 'edit']);
     Route::put('/update-barang', [BarangController::class, 'update']);
     Route::delete('/delete-barang', [BarangController::class, 'destroy']);
-
-    Route::get('/dashboard/gudang/{id}', [GudangController::class, 'gudangBarang']);
     
+    // Route::get('/tambah-stok', 'StokGudangController@tambahStok')->name('tambah.stok');
+    // Route::post('/simpan-stok', 'StokGudangController@simpanStok')->name('simpan.stok');
+    // Route::get('/tambah-stok', [StokgudangController::class, 'tambahStok']);
+    // Route::get('/simpan-stok', [StokgudangController::class, 'simpanStok']);
+    // Route::get('/stokGudang', [StokgudangController::class, 'index']);
+
     // Route::get('/dashboard/stokGudang', [StokgudangController::class, 'index']);
-    // Route::post('/add-stokGudang', [StokgudangController::class, 'store']);
+    // Route::get('/dashboard/stokGudang/formtambahbanyak', [StokgudangController::class, 'formtambahbanyak']);
+    // Route::post('/dashboard/stokGudang/simpandatabanyak', [StokgudangController::class, 'simpanStok']); 
+    // Route::post('/simpan-banyak', 'StokgudangController@simpanBanyak')->name('simpan.banyak');
     // Route::get('/edit-stokGudang/{id}', [StokgudangController::class, 'edit']);
     // Route::put('/update-stokGudang', [StokgudangController::class, 'update']);
     // Route::delete('/delete-stokGudang', [StokgudangController::class, 'destroy']);
+
+    Route::get('/dashboard/stokgudang' , [StokgudangController::class, 'index']);
+    Route::post('/dashboard/stokgudang' , [StokgudangController::class, 'store']);
+
+    Route::get('/dashboard/detail/stokgudang' , [StokgudangController::class, 'detail']);
+    Route::get('/dashboard/detail/stokgudang/{id}' , [StokgudangController::class, 'detailStokgudang']);
+    Route::get('/edit-detailstokgudang/{id}', [StokgudangController::class, 'edit']);
+    Route::put('/update-detailstokgudang', [StokgudangController::class, 'update']);
+
+    Route::get('/gudang/{gudang_id}/barang', [GudangController::class, 'showBarang'])->name('gudang.barang');
+
+
+    Route::get('/dashboard/mutasi' , [MutasiController::class, 'index']);
+    Route::get('/dashboard/mutasi/tambah' , [MutasiController::class, 'pembantu']);
+    Route::post('/dashboard/mutasi/tambah' , [MutasiController::class, 'store']);
+    Route::get('/dashboard/mutasi/{id}/cetak-pdf/{ukuran}', [MutasiController::class, 'cetakPdf'])->name('mutasi.cetakPdf');
+
+
+
+
+    Route::get('/dashboard/gudang/{id}', [GudangController::class, 'gudangBarang']);
+    
 });
 

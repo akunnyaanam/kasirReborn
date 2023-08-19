@@ -14,10 +14,21 @@ class Gudang extends Model
         'alamat'
     ];
 
+    public function detailMutasi()
+    {
+        return $this->hasMany(DetailMutasi::class, 'gudang_id');
+    }
+
+    public function stokGudangs()
+    {
+        return $this->hasMany(StokGudang::class, 'gudang_id');
+    }
+
     public function Rgudang()
     {
         return $this->hasOne(Gudang::class);
     }
+
     public function Rbarang()
     {
         return $this->hasOne(Gudang::class);

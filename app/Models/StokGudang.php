@@ -9,20 +9,37 @@ class StokGudang extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_barang',
-        'id_gudang',
-        'stok_gudang'
+        'gudang_id'
     ];
-
-    public function RRstokbarang()
+    public function gudang()
     {
-        return $this->belongsTo(Barang::class, 'id_barang');
+        return $this->belongsTo(Gudang::class, 'gudang_id');
     }
 
-    public function RRstokgudang()
+    public function barang()
     {
-        return $this->hasMany(Gudang::class, 'id_gudang');
+        return $this->belongsTo(Barang::class, 'barang_id');
     }
+
+    public function detail()
+    {
+        return $this->hasMany(DetailStokGudang::class, 'stokgudang_id');
+    }
+    
+    public function GudangAwal()
+    {
+        return $this->hasMany(DetailMutasi::class, 'gudang_awal_id');
+    }
+
+    // public function RRstokbarang()
+    // {
+    //     return $this->belongsTo(Barang::class, 'id_barang');
+    // }
+
+    // public function RRstokgudang()
+    // {
+    //     return $this->belongsTo(Gudang::class, 'id_gudang');
+    // }
 
 
 }

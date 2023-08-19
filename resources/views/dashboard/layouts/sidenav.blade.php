@@ -24,6 +24,14 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
                     Barang
                 </a>                    
+                <a class="nav-link" href="/dashboard/detail/stokgudang">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
+                    Barang Ke Gudang
+                </a>                    
+                <a class="nav-link" href="/dashboard/mutasi">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
+                    Mutasi
+                </a>                    
                 <div class="sb-sidenav-menu-heading">Transaksi</div>
                 <a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

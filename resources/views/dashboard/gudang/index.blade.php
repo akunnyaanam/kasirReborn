@@ -150,12 +150,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                    $i = 1;
-                                    @endphp
                                     @foreach ($gudang as $data)
                                     <tr>
-                                        <td>{{ $i++; }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data->kode_gudang }}</td>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->alamat }}</td>

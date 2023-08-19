@@ -195,18 +195,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                    $i = 1;
-                                    @endphp
                                     @foreach ($barang as $data)
                                     <tr>
-                                        <td>{{ $i++; }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data->kode_barang }}</td>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->RjenisBarang->kategori_barang }}</td>
                                         <td>{{ $data->RRpemasok->nama }}</td>
-                                        <td>{{ $data->harga_beli }}</td>
-                                        <td>{{ $data->harga_jual }}</td>
+                                        <td>Rp {{ number_format($data->harga_beli, 2, ',', '.') }}</td>
+                                        <td>Rp {{ number_format($data->harga_jual, 2, ',', '.') }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group"
                                                 aria-label="Small button group">

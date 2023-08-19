@@ -159,12 +159,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                    $i = 1;
-                                    @endphp
                                     @foreach ($pemasok as $data)
                                     <tr>
-                                        <td>{{ $i++; }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data->kode_pemasok }}</td>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->alamat }}</td>
