@@ -145,6 +145,10 @@
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             {{ $tableTitle }}
+                            <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" style="float: right;">
+                                <i class="fa-regular fa-square-plus"></i> Tambah Pemasok
+                            </button>
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -168,7 +172,7 @@
                                         <td>{{ $data->no_telp }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                                <button type="submit" value="{{ $data->id }}" class="btn btn-warning btn-sm" id="editbtn"><i class="fa-solid fa-pencil "></i></button>
+                                                <button type="submit" value="{{ $data->id }}" class="btn btn-warning btn-sm me-2" id="editbtn"><i class="fa-solid fa-pencil "></i></button>
                                                 <button type="button" value="{{ $data->id }}" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa-solid fa-trash"></i></button>
                                             </div>
                                         </td>
@@ -176,12 +180,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <i class="fa-regular fa-square-plus"></i> Tambah Jenis Barang
-                            </button>
                         </div>
                     </div>
                 </div>

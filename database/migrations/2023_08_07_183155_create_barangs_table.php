@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreign('id_jenis_barang')->references('id')->on('jenis_barangs');
             $table->foreign('id_pemasok')->references('id')->on('pemasoks');
             // $table->foreign('id_gudang')->references('id')->on('gudangs');
-            // $table->foreign('id_toko')->references('id')->on('tokos');
+            // $table->foreign('id_toko')->reference½s('id')->on('tokos');
         });
     }
 

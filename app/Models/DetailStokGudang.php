@@ -23,4 +23,14 @@ class DetailStokGudang extends Model
     {
         return $this->belongsTo(StokGudang::class, 'stokgudang_id');
     }
+    
+    public function stokToko()
+    {
+        return $this->hasMany(DetailStokToko::class);
+    }
+    
+    public function totalStokToko()
+    {
+        return $this->hasMany(TotalStokToko::class, 'barang_id');
+    }
 }

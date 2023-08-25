@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\DetailStokToko;
+use App\Observers\DetailStokTokoObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

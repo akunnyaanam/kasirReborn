@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\DetailStokGudang;
+use App\Models\DetailStokToko;
+use App\Models\StokToko;
 use App\Models\Toko;
+use App\Models\TotalStokToko;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -23,6 +28,21 @@ class TokoController extends Controller
             'title' => 'Toko',
             'desc'=> 'Data toko',
             'tableTitle' => 'Data Toko'
+        ]);
+    }
+
+    public function showTokoBarang($toko_id)
+    {
+        $toko = Toko::findOrFail($toko_id);
+        // $totalStokToko = TotalStokToko::with(['detailStokGudang.barang'])->where('toko_id', $toko_id)->get();
+        // $totalStokToko = TotalStokToko::with(['detailStokGudang'])->where('toko_id', $toko_id)->get();
+        $totalStokToko = TotalStokToko::with(['detailStokGudang.barang.jenisBarang'])
+            ->where('toko_id', $toko_id)
+            ->get();
+
+        return view('dashboard.stoktoko.show_barang', compact('toko', 'totalStokToko'), [
+            'title' => 'Detail Toko',
+            'tableTitle' => 'Data ' . $toko->nama
         ]);
     }
 
@@ -111,3 +131,22 @@ class TokoController extends Controller
         return redirect()->back()->with('status', 'Delete Berhasil');
     }
 }
+
+// $detailStokTokoData = DetailStokToko::whereHas('stokToko', function ($query) use ($toko_id) {
+        //     $query->where('toko_id', $toko_id);
+        // })
+        // ->with('barang')
+        // ->get();
+        // $detailStokTokoData = TotalStokToko::whereHas('stokToko', function ($query) use ($toko_id) {
+        //     $query->where('toko_id', $toko_id);
+        // })
+        // ->with(['stokToko.detailStokTokos.barang']) // Mengambil relasi barang dari detailStokTokos
+        // ->get();
+
+        // $detailStokTokoData = TotalStokToko::whereHas('stokToko', function ($query) use ($toko_id) {
+        //     $query->where('toko_id', $toko_id);
+        // })
+        // ->with(['stokToko.detailStokTokos.barang', 'stokTokos' => function ($query) {
+        //     $query->select('stoktoko_id', 'barang_id', 'total_stok'); // Menambahkan total_stok ke dalam query
+        // }])
+        // ->get();

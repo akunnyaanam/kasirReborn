@@ -2,27 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Toko;
+use App\Models\TotalStokToko;
+use App\Models\DetailStokToko;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StokToko extends Model
 {
     use HasFactory;
+    protected $fillable = ['kode_suratjalan', 'toko_id'];
 
-    protected $fillable = [
-        'id_barang',
-        'id_toko',
-        'stok_toko'
-    ];
-
-    public function RRstokbarang()
+    public function toko(): BelongsTo
     {
-        return $this->belongsTo(Barang::class, 'id_barang');
+        return $this->belongsTo(Toko::class, 'toko_id');
     }
 
-    public function RRstoktoko()
+    public function detailStokTokos(): HasMany
     {
-        return $this->hasMany(Toko::class, 'id_toko');
+        return $this->hasMany(DetailStokToko::class, 'stoktoko_id');
     }
 
 }

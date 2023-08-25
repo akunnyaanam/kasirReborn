@@ -179,6 +179,10 @@
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             {{ $tableTitle }}
+                            <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" style="float: right;">
+                                <i class="fa-regular fa-square-plus"></i> Tambah Barang
+                            </button>
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -200,7 +204,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data->kode_barang }}</td>
                                         <td>{{ $data->nama }}</td>
-                                        <td>{{ $data->RjenisBarang->kategori_barang }}</td>
+                                        <td>{{ $data->jenisBarang->kategori_barang }}</td>
                                         <td>{{ $data->RRpemasok->nama }}</td>
                                         <td>Rp {{ number_format($data->harga_beli, 2, ',', '.') }}</td>
                                         <td>Rp {{ number_format($data->harga_jual, 2, ',', '.') }}</td>
@@ -208,7 +212,7 @@
                                             <div class="btn-group btn-group-sm" role="group"
                                                 aria-label="Small button group">
                                                 <button type="submit" value="{{ $data->id }}"
-                                                    class="btn btn-warning btn-sm" id="editbtn"><i
+                                                    class="btn btn-warning btn-sm me-2" id="editbtn"><i
                                                         class="fa-solid fa-pencil "></i></button>
                                                 <button type="button" value="{{ $data->id }}"
                                                     class="btn btn-danger btn-sm" id="deletebtn"><i
@@ -219,12 +223,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <i class="fa-regular fa-square-plus"></i> Tambah Barang
-                            </button>
                         </div>
                     </div>
                 </div>

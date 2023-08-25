@@ -67,7 +67,7 @@
                                         <span class="text-success gudang-check"></span>
                                         <span class="text-danger gudang-error"></span>
                                     </td>
-                                    <td><input type="number" class="form-control" id="jumlah" name="jumlah[]" required></td>
+                                    <td><input type="number" class="form-control" id="jumlah" name="stok[]" required></td>
                                     <td><a href="#" class="btn btn-info" id="addbarang">Tambah Barang</a></td>
                                 </tr>
                             </tbody>

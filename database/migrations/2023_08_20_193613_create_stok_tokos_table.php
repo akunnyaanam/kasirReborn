@@ -12,14 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stok_tokos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('kode_suratjalan')->unique();
+            $table->unsignedBigInteger('toko_id');
             $table->timestamps();
-            $table->unsignedBigInteger('id_toko');
-            $table->unsignedBigInteger('id_barang');
-            $table->integer('stok_toko');
 
-            $table->foreign('id_toko')->references('id')->on('tokos');
-            $table->foreign('id_barang')->references('id')->on('barangs');
+            $table->foreign('toko_id')->references('id')->on('tokos');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stok_toko');
+        Schema::dropIfExists('stok_tokos');
     }
 };

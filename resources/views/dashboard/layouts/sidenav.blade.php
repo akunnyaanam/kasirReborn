@@ -32,10 +32,18 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
                     Mutasi
                 </a>                    
+                <a class="nav-link" href="/dashboard/stoktoko">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
+                    Stok Barang ke Toko
+                </a>       
                 <div class="sb-sidenav-menu-heading">Transaksi</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/dashboard/pengeluaran">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Pengeluaran
+                </a>
+                <a class="nav-link" href="/dashboard/pengeluaran/detail">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Detail Pengeluaran
                 </a>
                 <a class="nav-link" href="tables.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

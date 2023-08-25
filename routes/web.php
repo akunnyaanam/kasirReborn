@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StokgudangController;
 use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\MutasiController;
+use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\StoktokoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,16 +86,31 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/detail/stokgudang/{id}' , [StokgudangController::class, 'detailStokgudang']);
     Route::get('/edit-detailstokgudang/{id}', [StokgudangController::class, 'edit']);
     Route::put('/update-detailstokgudang', [StokgudangController::class, 'update']);
-
     Route::get('/gudang/{gudang_id}/barang', [GudangController::class, 'showBarang'])->name('gudang.barang');
-
-
+    
+    
     Route::get('/dashboard/mutasi' , [MutasiController::class, 'index']);
     Route::get('/dashboard/mutasi/tambah' , [MutasiController::class, 'pembantu']);
     Route::post('/dashboard/mutasi/tambah' , [MutasiController::class, 'store']);
     Route::get('/dashboard/mutasi/{id}/cetak-pdf/{ukuran}', [MutasiController::class, 'cetakPdf'])->name('mutasi.cetakPdf');
+    
+    Route::get('/dashboard/stoktoko' , [StoktokoController::class, 'index']);
+    Route::get('/dashboard/stoktoko/tambah' , [StoktokoController::class, 'pembantu']);
+    Route::post('/dashboard/stoktoko/tambah' , [StoktokoController::class, 'store']);
+    Route::get('/dashboard/stoktoko/{id}/cetak-pdf/{ukuran}', [StoktokoController::class, 'cetakPdf'])->name('cetak.pdf');
+    // Route::get('', [StoktokoController::class, 'cetakPdf'])->name('stoktoko.cetakPdf');
+    // Route::get('/dashboard/toko/{toko_id}/detailstok', [TokoController::class, 'showTokoDetailStok'])->name('toko.detailstok');
+    Route::get('/dashboard/toko/{toko_id}/barang', [TokoController::class, 'showTokoBarang'])->name('toko.barang');
 
-
+    Route::get('/dashboard/pengeluaran', [PengeluaranController::class, 'index']);
+    Route::post('/add-pengeluaran', [PengeluaranController::class, 'store']);
+    Route::get('/edit-pengeluaran/{id}', [PengeluaranController::class, 'edit']);
+    Route::put('/update-pengeluaran', [PengeluaranController::class, 'update']);
+    Route::delete('/delete-pengeluaran', [PengeluaranController::class, 'destroy']);
+    Route::post('/verifikasi/{id}', [PengeluaranController::class, 'verifikasiPengeluaran'])->name('verifikasi.pengeluaran');
+    // Route::get('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'showDetail']);
+    Route::get('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'filterPengeluaran'])->name('filter.pengeluaran');
+    Route::post('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'filterPengeluaran'])->name('filter.pengeluaran');
 
 
     Route::get('/dashboard/gudang/{id}', [GudangController::class, 'gudangBarang']);
