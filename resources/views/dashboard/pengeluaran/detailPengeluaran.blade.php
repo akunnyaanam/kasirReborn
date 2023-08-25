@@ -49,17 +49,13 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <form method="POST">
-                                @csrf
-                                <input type="hidden" name="tanggal" value="{{ $tanggal }}">
-                                <button type="submit" class="btn btn-success">Print</button>
-                            </form>
                         </div>
                         <div class="card-footer d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary  btn-sm " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <i class="fa-solid fa-print"></i> Print
-                            </button>
+                            <form action="{{ route('generate.pdf') }}" method="post" target="_blank">
+                                @csrf
+                                <input type="hidden" name="tanggal" value="{{ $tanggal }}">
+                                <button type="submit" class="btn btn-primary">Generate PDF</button>
+                            </form>
                         </div>
                     </div>
                 </div>

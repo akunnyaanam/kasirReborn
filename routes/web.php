@@ -111,6 +111,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'showDetail']);
     Route::get('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'filterPengeluaran'])->name('filter.pengeluaran');
     Route::post('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'filterPengeluaran'])->name('filter.pengeluaran');
+    Route::post('/dashboard/pengeluaran/generate-pdf', [PengeluaranController::class, 'generatePDF'])->name('generate.pdf');
 
 
     Route::get('/dashboard/gudang/{id}', [GudangController::class, 'gudangBarang']);

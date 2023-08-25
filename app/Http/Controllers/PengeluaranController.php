@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DetailPengeluaran;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF;
 
 class PengeluaranController extends Controller
 {
@@ -48,6 +50,18 @@ class PengeluaranController extends Controller
         return view('dashboard.pengeluaran.detailPengeluaran', compact('tanggal', 'detailPengeluaran'), [
             'title' => 'Detail Pengeluaran'
         ]);
+    }
+
+    public function generatePDF(Request $request)
+    {
+        $tanggal = $request->input('tanggal');
+
+        $detailPengeluaran = DetailPengeluaran::whereDate('created_at', $tanggal)
+            ->get();
+
+        $pdf = FacadePdf::loadView('dashboard.pengeluaran.pdf', compact('detailPengeluaran', 'tanggal'));
+        
+        return $pdf->stream('pengeluaran-'.$tanggal.'.pdf');
     }
 
 
