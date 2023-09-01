@@ -71,11 +71,19 @@
                                 <tbody>  
                                     @foreach ($totalStokToko as $item)
                                         <tr>
-                                            <td>{{ $item->barang->kode_barang }}</td>
-                                            <td>{{ $item->barang->nama }}</td>
-                                            <td>{{ $item->barang->jenisBarang->kategori_barang }}</td>
-                                            <td>Rp {{ number_format($item->barang->harga_jual, 2, ',', '.') }}</td>
-                                            <td>{{ $item->total_stok }}</td>
+                                            @if ($item->total_stok == 0)
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $item->barang->kode_barang }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $item->barang->nama }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $item->barang->jenisBarang->kategori_barang }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">Rp {{ number_format($item->barang->harga_jual, 2, ',', '.') }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">STOK KOSONG</h6></td>
+                                            @else
+                                                <td>{{ $item->barang->kode_barang }}</td>
+                                                <td>{{ $item->barang->nama }}</td>
+                                                <td>{{ $item->barang->jenisBarang->kategori_barang }}</td>
+                                                <td>Rp {{ number_format($item->barang->harga_jual, 2, ',', '.') }}</td>
+                                                <td>{{ $item->total_stok }}</td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
