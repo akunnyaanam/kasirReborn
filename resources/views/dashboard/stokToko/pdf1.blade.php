@@ -98,7 +98,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $dataa->barang->barang->kode_barang }}</td>
                         <td>{{ $dataa->barang->barang->nama }}</td>
-                        <td>{{ $dataa->barang->stokgudang->gudang->nama }}</td>
+                        <td>{{ $dataa->barang->gudang->nama }}</td>
                         <td>{{ $dataa->stok }}</td>
                         <td></td>
                     </tr>

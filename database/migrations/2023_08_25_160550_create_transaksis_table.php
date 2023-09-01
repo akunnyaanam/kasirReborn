@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('kode_transaksi')->unique();
             $table->unsignedBigInteger('user_id');
-            $table->integer('harga_total');
-            $table->integer('uang_pembayaran');
-            $table->integer('uang_kembalian');
+            $table->bigInteger('harga_total');
+            $table->bigInteger('uang_pembayaran');
+            $table->bigInteger('uang_kembalian');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

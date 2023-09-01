@@ -62,7 +62,7 @@ class StoktokoController extends Controller
     public function cetakPdf($id, $ukuran)
     {
         $stoktoko = StokToko::with(['detailStokTokos' => function ($query) {
-            $query->with(['barang.barang', 'barang.stokgudang.gudang']);
+            $query->with(['barang.barang', 'barang.gudang']);
         }])->where('id', $id)->first();        
 
         if ($ukuran === 'a4') {
