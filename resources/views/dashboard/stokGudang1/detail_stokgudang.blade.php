@@ -9,84 +9,84 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-11 pt-3">
-                    <h1 class="my-3">Detail Stok Gudang</h1>
-                    <div class="card mt-4">
-                        <div class="card-header" style="align-items: center">
-                            <i class="fas fa-table me-1"></i>
-                            Detail Histori
-                            <a href="/dashboard/detail/stokgudang" class="btn btn-dark" style="float: right;">Kembali</a>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
+                    <h1>Daftar Stok Gudang</h1>
+                    <a href="/dashboard/stokgudang/tambah/" class="btn btn-info mb-3">Masukan Barang ke Gudang</a><br>
+                    @foreach ($gudangs as $gudang)
+                        <a href="{{ route('gudang.barang', ['gudang_id' => $gudang->id]) }}" class="btn btn-success mb-3">Daftar Barang di {{ $gudang->nama }}</a>
+                    @endforeach
+                    <table class="table table-bordered mt-3">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Gudang</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Stok</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($stokgudangs as $index => $stokGudang)
+                                @foreach ($stokGudang->detail as $barang)
                                     <tr>
-                                        <th scope="col">Gudang</th>
-                                        <th scope="col">Keterangan</th>
+                                        @if ($loop->first)
+                                            <td rowspan="{{ count($stokGudang->detail) }}" class="text-center align-middle">{{ $stokGudang->gudang->nama }}</td>
+                                        @endif
+                                        <td>{{ $barang->barang->kode_barang }}</td>
+                                        <td>{{ $barang->barang->nama }}</td>
+                                        <td>{{ $barang->stok }}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ $stokgudang->gudang->nama }}</td>
-                                        <td>
-                                            @foreach ($stokgudang->detail as $item)
-                                                <p style="display: inline;">Barang {{ $loop->iteration }}</p> =
-                                                <p style="font-size: 18px; text-transform: uppercase; display: inline; font-weight: bold;">{{ $item->barang->nama }}</p> || Stok: <p style="font-size: 18px; display: inline; font-weight: bold;">{{ $item->stok }}</p> <br>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                @endforeach
+                            @endforeach
+                        </tbody>
+                    </table>         
                 </div>
             </div>
         </div>
     </main>
 </div>
 
-  {{-- <div id="layoutSidenav_content">
-    <main>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-11 pt-3">
-                    <h1 class="my-3">Detail Stok Gudang</h1>
-                    <div class="card mt-4">
-                        <div class="card-header" style="align-items: center">
-                            <i class="fas fa-table me-1"></i>
-                            Detail Histori
-                            <a href="/dashboard/detail/stokgudang" class="btn btn-dark" style="float: right;">Kembali</a>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <tr>
-                                            <th scope="col">Gudang</th>
-                                            <th scope="col">Keterangan</th>
-                                        </tr>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ $stokgudang->gudang->nama }}</td>
-                                        <td>
-                                            @foreach ($stokgudang->detail as $item)
-                                                <p style="display: inline;">Barang {{ $loop->iteration }}</p> =
-                                                <p style="font-size: 18px; text-transform: uppercase; display: inline; font-weight: bold;">{{ $item->barang->nama }}</p> || Stok: <p style="font-size: 18px; display: inline; font-weight: bold;">{{ $item->stok }}</p> <br>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</div> --}}
 
 @endsection
+{{-- <div id="layoutSidenav_content">
+  <main>
+      <div class="container-fluid">
+          <div class="row justify-content-center">
+              <div class="col-lg-11 pt-3">
+                  <h1 class="my-3">Detail Stok Gudang</h1>
+                  <div class="card mt-4">
+                      <div class="card-header" style="align-items: center">
+                          <i class="fas fa-table me-1"></i>
+                          Detail Histori
+                          <a href="/dashboard/detail/stokgudang" class="btn btn-dark" style="float: right;">Kembali</a>
+                      </div>
+                      <div class="card-body">
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <tr>
+                                          <th scope="col">Gudang</th>
+                                          <th scope="col">Keterangan</th>
+                                      </tr>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>{{ $stokgudang->gudang->nama }}</td>
+                                      <td>
+                                          @foreach ($stokgudang->detail as $item)
+                                              <p style="display: inline;">Barang {{ $loop->iteration }}</p> =
+                                              <p style="font-size: 18px; text-transform: uppercase; display: inline; font-weight: bold;">{{ $item->barang->nama }}</p> || Stok: <p style="font-size: 18px; display: inline; font-weight: bold;">{{ $item->stok }}</p> <br>
+                                          @endforeach
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </main>
+</div> --}}
 
 {{-- <!doctype html>
 <html lang="en">

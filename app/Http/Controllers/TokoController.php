@@ -36,7 +36,7 @@ class TokoController extends Controller
         $toko = Toko::findOrFail($toko_id);
         // $totalStokToko = TotalStokToko::with(['detailStokGudang.barang'])->where('toko_id', $toko_id)->get();
         // $totalStokToko = TotalStokToko::with(['detailStokGudang'])->where('toko_id', $toko_id)->get();
-        $totalStokToko = TotalStokToko::with(['detailStokGudang.barang.jenisBarang'])
+        $totalStokToko = TotalStokToko::with(['totalStokGudang.barang.jenisBarang'])
             ->where('toko_id', $toko_id)
             ->get();
 

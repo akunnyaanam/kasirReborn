@@ -51,17 +51,21 @@
                                 <tr>
                                     <td>
                                         <select name="barang_id[]" class="form-control barang-select" required>
-                                            <option selected>Pilih</option>
-                                            @foreach($detailstokgudang as $data)
-                                                @php
-                                                    $isDisabled = $data->stok == 0 ? 'disabled' : '';
-                                                    $colorClass = $data->stok == 0 ? 'text-white bg-danger' : '';
-                                                @endphp
-                                                <option value="{{ $data->id }}" data-gudang="{{ $data->stokgudang->gudang->nama }}" data-stok="{{ $data->stok }}" data-gudang-id="{{ $data->stokgudang->gudang_id }}" {{ $isDisabled }} class="{{ $colorClass }}">
-                                                    {{ $data->barang->nama }} || {{ $data->stok }} || {{ $data->stokgudang->gudang->nama }}
+                                            <option value="" selected>Pilih</option>
+                                            @foreach($totalStokGudang as $data)
+                                                <option value="{{ $data->id . '-' . $data->barang_id }}" data-gudang="{{ $data->gudang->nama }}" data-stok="{{ $data->total_stok }}" data-gudang-id="{{ $data->gudang_id }}">
+                                                    {{ $data->barang->nama }} || Stok: {{ $data->total_stok }} || Gudang: {{ $data->gudang->nama }}
                                                 </option>
                                             @endforeach
-                                        </select>
+                                        </select>                                                                             
+                                        {{-- <select name="barang_id[]" class="form-control barang-select" required>
+                                            <option selected>Pilih</option>
+                                            @foreach($totalStokGudang as $data)
+                                                <option value="{{ $data->barang_id }}" data-gudang="{{ $data->gudang->nama }}" data-stok="{{ $data->total_stok }}" data-gudang-id="{{ $data->gudang_id }}">
+                                                    {{ $data->barang->nama }} || {{ $data->total_stok }} || {{ $data->gudang->nama }}
+                                                </option>
+                                            @endforeach
+                                        </select> --}}
                                     </td>                                    
                                     {{-- <td>
                                         <select name="barang_id[]" class="form-control barang-select" required>

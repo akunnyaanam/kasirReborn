@@ -29,17 +29,20 @@
                                                 <th>Nama Barang</th>
                                                 <th>Gudang Asal</th>
                                                 <th>Gudang Tujuan</th>
+                                                <th>Waktu</th>
                                                 <th>Jumlah Stok</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($mutasi->detailMutasi as $detailMutasis)
                                                 <tr>
-                                                    <td>{{ $detailMutasis->barang->kode_barang }}</td>
-                                                    <td>{{ $detailMutasis->barang->nama }}</td>
-                                                    <td>{{ $detailMutasis->gudangAwal->gudang->nama }}</td>
-                                                    <td>{{ $detailMutasis->gudangTujuan->nama }}</td>
-                                                    <td>{{ $detailMutasis->jumlah_barang }}</td>
+                                                    <td>{{ $detailMutasis->totalStokGudang->barang->kode_barang ?? '-' }}</td>
+                                                    <td>{{ $detailMutasis->totalStokGudang->barang->nama ?? '-' }}</td>
+                                                    <td>{{ $detailMutasis->gudang_awal }}</td>
+                                                    <td>{{ $detailMutasis->gudangTujuan ? $detailMutasis->gudangTujuan->nama : '-' }}</td>
+                                                    <td>{{ $detailMutasis->created_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }}
+                                                    </td>
+                                                    <td>{{ $detailMutasis->jumlah_barang ?? '-' }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

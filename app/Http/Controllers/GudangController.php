@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Gudang;
 use Illuminate\View\View;
 use App\Models\StokGudang;
+use App\Models\TotalStokGudang;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -39,8 +40,9 @@ class GudangController extends Controller
     public function showBarang($gudang_id)
     {
         $gudang = Gudang::findOrFail($gudang_id);
+        $totalstokgudang = TotalStokGudang::where('gudang_id', $gudang_id)->get();
 
-        return view('dashboard.stokGudang1.show_barang', compact('gudang'), [
+        return view('dashboard.stokGudang1.show_barang', compact('gudang', 'totalstokgudang'), [
             'title' => 'Detail Gudang',
             'tableTitle' => 'Data ' . $gudang->nama
         ]);

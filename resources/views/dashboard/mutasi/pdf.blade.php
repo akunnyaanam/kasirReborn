@@ -13,11 +13,12 @@
             border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
+            font-size: 10px;
         }
         .table-bordered th,
         .table-bordered td {
             border: 1px solid black;
-            padding: 8px;
+            padding: 2px;
             text-align: left;
         }
         .header {
@@ -63,7 +64,7 @@
             }
 
             .container-fluid {
-                padding: 10px;
+                /* padding: 10px; */
                 font-size: 12px; /* Ukuran font lebih kecil pada versi cetak A6 */
             }
         }
@@ -85,16 +86,17 @@
         </div>
         <table>
             <tr>
-                <td><p>Kode Mutasi</p></td>
-                <td><p>:</p></td>
-                <td><p>{{ $mutasis->kode_mutasi }}</p></td>
+                <td>Kode Mutasi</td>
+                <td class="ps-3">:</td>
+                <td><b>{{ $mutasis->kode_mutasi }}</b></td>
             </tr>
             <tr>
-                <td><p>Waktu Mutasi</p></td>
-                <td><p>:</p></td>
-                <td><p>{{ $mutasis->created_at->format('d F Y | H:i') }}</p></td>
+                <td>Waktu Mutasi</td>
+                <td class="ps-3">:</td>
+                <td><b>{{ $mutasis->created_at->format('d F Y | H:i') }}</b></td>
             </tr>
         </table>
+        <br>
           <h4>Detail Mutasi</h2>
           <table class="table table-bordered">
               <thead>
@@ -102,9 +104,11 @@
                     <th>No</th>
                     <th>Kode Barang</th>
                     <th>Nama Barang</th>
+                    <th>Pemasok</th>
                     <th>Gudang Asal</th>
                     <th>Gudang Tujuan</th>
                     <th>Jumlah Stok</th>
+                    <th>Waktu</th>
                     <th>Aksi</th>
                   </tr>
               </thead>
@@ -112,11 +116,13 @@
                   @foreach ($mutasis->detailMutasi as $detailMutasis)
                   <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $detailMutasis->barang->kode_barang }}</td>
-                      <td>{{ $detailMutasis->barang->nama }}</td>
-                      <td>{{ $detailMutasis->gudangAwal->gudang->nama }}</td>
+                      <td>{{ $detailMutasis->totalStokGudang->barang->kode_barang }}</td>
+                      <td>{{ $detailMutasis->totalStokGudang->barang->nama }}</td>
+                      <td>{{ $detailMutasis->totalStokGudang->barang->RRpemasok->nama }}</td>
+                      <td>{{ $detailMutasis->gudang_awal }}</td>
                       <td>{{ $detailMutasis->gudangTujuan->nama }}</td>
                       <td>{{ $detailMutasis->jumlah_barang }}</td>
+                      <td>{{ $detailMutasis->created_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }}</td>
                       <td></td>
                   </tr>
                   @endforeach

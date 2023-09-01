@@ -12,6 +12,8 @@ use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\StoktokoController;
+use App\Http\Controllers\Transaksi;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +82,8 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/delete-stokGudang', [StokgudangController::class, 'destroy']);
 
     Route::get('/dashboard/stokgudang' , [StokgudangController::class, 'index']);
-    Route::post('/dashboard/stokgudang' , [StokgudangController::class, 'store']);
+    Route::get('/dashboard/stokgudang/tambah/' , [StokgudangController::class, 'indexx']);
+    Route::post('/dashboard/stokgudang/tambah/' , [StokgudangController::class, 'store']);
 
     Route::get('/dashboard/detail/stokgudang' , [StokgudangController::class, 'detail']);
     Route::get('/dashboard/detail/stokgudang/{id}' , [StokgudangController::class, 'detailStokgudang']);
@@ -112,6 +115,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'filterPengeluaran'])->name('filter.pengeluaran');
     Route::post('/dashboard/pengeluaran/detail', [PengeluaranController::class, 'filterPengeluaran'])->name('filter.pengeluaran');
     Route::post('/dashboard/pengeluaran/generate-pdf', [PengeluaranController::class, 'generatePDF'])->name('generate.pdf');
+
+    Route::get('/dashboard/transaksi', [TransaksiController::class, 'index']);
+    Route::post('/dashboard/simpan-transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
+    Route::get('/dashboard/histori', [TransaksiController::class, 'histori']);
+    Route::post('/dashboard/histori', [TransaksiController::class, 'histori'])->name('histori.transaksi');
+    Route::post('/dashboard/transaksi/generate-pdf', [TransaksiController::class, 'generatePDF'])->name('generate.pdf');
 
 
     Route::get('/dashboard/gudang/{id}', [GudangController::class, 'gudangBarang']);

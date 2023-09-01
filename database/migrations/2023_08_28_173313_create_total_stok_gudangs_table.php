@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_stok_tokos', function (Blueprint $table) {
+        Schema::create('total_stok_gudangs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('stoktoko_id');
             $table->unsignedBigInteger('barang_id');
-            $table->integer('stok');
+            $table->unsignedBigInteger('gudang_id');
+            $table->integer('total_stok')->default(0);
             $table->timestamps();
-            $table->unique(['stoktoko_id', 'barang_id']);
 
-            $table->foreign('barang_id')->references('id')->on('detail_stok_gudangs');
-            $table->foreign('stoktoko_id')->references('id')->on('stok_tokos');
+            $table->foreign('barang_id')->references('id')->on('barangs');
+            $table->foreign('gudang_id')->references('id')->on('gudangs');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_stok_tokos');
+        Schema::dropIfExists('total_stok_gudangs');
     }
 };

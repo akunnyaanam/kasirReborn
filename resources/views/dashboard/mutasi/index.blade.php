@@ -39,15 +39,28 @@
                             <tbody class="barang">
                                 <tr>
                                     <td>
-                                        <select name="barang_id[]" class="form-control barang-select" required>
+                                        <select name="barang_gudang_ids[]" class="form-control barang-select" required>
                                             <option selected>Pilih Barang Yang Akan Di Mutasi</option>
-                                            @foreach($detailstokgudang as $data)
-                                                <option value="{{ $data->id }}" data-gudang="{{ $data->stokgudang->gudang->nama }}" data-stok="{{ $data->stok }}" data-gudang-id="{{ $data->stokgudang->gudang_id }}">{{ $data->barang->nama }} || {{ $data->stok }} || {{ $data->stokgudang->gudang->nama }}</option>
+                                            @foreach($totalStokGudang as $data)
+                                                <option value="{{ $data->barang_id }}:{{ $data->gudang->nama }}"
+                                                        data-gudang="{{ $data->gudang->nama ?? '' }}" 
+                                                        data-stok="{{ $data->total_stok ?? '' }}" 
+                                                        data-gudang-id="{{ $data->gudang->nama ?? '' }}">
+                                                    {{ $data->barang->nama ?? '' }} || {{ $data->total_stok ?? '' }} || {{ $data->gudang->nama ?? '' }}
+                                                </option>
                                             @endforeach
-                                            {{-- @foreach($detailstokgudang as $data)
-                                                <option value="{{ $data->id }}" data-gudang="{{ $data->stokgudang->gudang->nama }}" data-stok="{{ $data->stok }}">{{ $data->barang->nama }} || {{ $data->stok }} || {{ $data->stokgudang->gudang->nama }}</option>
-                                            @endforeach --}}
                                         </select>
+                                        {{-- <select name="barang_id[]" class="form-control barang-select" required>
+                                            <option selected>Pilih Barang Yang Akan Di Mutasi</option>
+                                            @foreach($totalStokGudang as $data)
+                                            <option value="{{ $data->barang_id }}_{{ $data->gudang_id }}" 
+                                                        data-gudang="{{ $data->gudang->nama ?? '' }}" 
+                                                        data-stok="{{ $data->total_stok ?? '' }}" 
+                                                        data-gudang-id="{{ $data->gudang->nama ?? '' }}">
+                                                    {{ $data->barang->nama ?? '' }} || {{ $data->total_stok ?? '' }} || {{ $data->gudang->nama ?? '' }}
+                                                </option>
+                                            @endforeach
+                                        </select> --}}
                                     </td>
                                     <td>
                                         {{-- <input type="text" class="form-control gudang-awal bg-light" name="gudang_awal_id[]" readonly> --}}
@@ -111,9 +124,6 @@
 
                 newRow.find('td:last-child').html('<a href="#" class="btn btn-danger remove-barang">Remove</a>'); // Tambah tombol Remove
                 newRow.appendTo('.barang');
-                // let barang = '<tr><td><select name="barang_id[]" class="form-control barang-select" required><option selected>Pilih Barang Yang Akan Di Mutasi</option>@foreach($detailstokgudang as $data)<option value="{{ $data->id }}" data-gudang="{{ $data->stokgudang->gudang->nama }}" data-stok="{{ $data->stok }}">{{ $data->barang->nama }} || {{ $data->stok }} || {{ $data->stokgudang->gudang->nama }}</option>@endforeach</select></td><td><input type="text" class="form-control gudang-awal bg-light" name="gudang_awal[]" readonly></td><td><input type="text" class="form-control stok-awal bg-light" name="stok_awal[]" readonly></td><td><select name="gudang_id[]" class="form-control" required><option selected>Pilih Gudang Tujuan</option>@foreach($gudang as $data)<option value="{{ $data->id }}">{{ $data->nama }}</option>@endforeach</select></td><td><input type="number" class="form-control" id="jumlah" name="jumlah[]" required></td><td><a href="#" class="btn btn-danger remove-barang">Remove</a></td></tr>';
-
-                // $('.barang').append(barang);
             }
 
             $(document).on('click', '.remove-barang', function (e) {

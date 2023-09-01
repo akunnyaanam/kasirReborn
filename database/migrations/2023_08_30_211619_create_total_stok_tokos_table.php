@@ -15,11 +15,13 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('barang_id');
             $table->unsignedBigInteger('toko_id');
+            // $table->unsignedBigInteger('gudang_id_asal');
             $table->integer('total_stok')->default(0);
             $table->timestamps();
 
-            $table->foreign('barang_id')->references('barang_id')->on('detail_stok_gudangs');
+            $table->foreign('barang_id')->references('id')->on('total_stok_gudangs');
             $table->foreign('toko_id')->references('id')->on('tokos');
+            // $table->foreign('gudang_id_asal')->references('gudang_id')->on('total_stok_gudangs');
         });
     }
 

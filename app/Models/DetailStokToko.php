@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\StokToko;
-use App\Models\TotalStokToko;
-use App\Models\DetailStokGudang;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +19,7 @@ class DetailStokToko extends Model
 
     public function barang(): BelongsTo
     {
-        return $this->belongsTo(DetailStokGudang::class, 'barang_id');
+        return $this->belongsTo(TotalStokGudang::class, 'barang_id');
     }
     
     public function totalStokToko(): HasMany
@@ -34,5 +31,9 @@ class DetailStokToko extends Model
     {
         return $this->belongsTo(Toko::class, 'toko_id');
     }
-}
 
+    public function barangg()
+    {
+        return $this->belongsTo(Barang::class, 'barang_id');
+    }
+}

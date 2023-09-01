@@ -24,7 +24,7 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
                     Barang
                 </a>                    
-                <a class="nav-link" href="/dashboard/detail/stokgudang">
+                <a class="nav-link" href="/dashboard/stokgudang">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-chair"></i></div>
                     Barang Ke Gudang
                 </a>                    
@@ -45,14 +45,14 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Detail Pengeluaran
                 </a>
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="/dashboard/transaksi">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Transaksi Penjualan
                 </a>
                 <div class="sb-sidenav-menu-heading">Report</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/dashboard/histori">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                    Laporan Keuangan
+                    Histori Transaksi
                 </a>
             </div>
         </div>

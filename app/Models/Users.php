@@ -52,4 +52,9 @@ class Users extends Model implements Authenticatable
     {
         return 'remember_token';
     }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

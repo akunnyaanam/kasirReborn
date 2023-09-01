@@ -27,25 +27,26 @@ class PengeluaranController extends Controller
         ]);
     }
 
-    public function showDetail()
-    {
-        $detailPengeluaran = DetailPengeluaran::all();
+    // public function showDetail()
+    // {
+    //     $detailPengeluaran = DetailPengeluaran::all();
 
-        return view('dashboard.pengeluaran.detailPengeluaran', compact('detailPengeluaran'), [
-            'title' => 'Detail Pengeluaran'
-        ]);
-    }
+    //     return view('dashboard.pengeluaran.detailPengeluaran', compact('detailPengeluaran'), [
+    //         'title' => 'Detail Pengeluaran'
+    //     ]);
+    // }
 
     public function filterPengeluaran(Request $request)
     {
         $tanggal = $request->input('tanggal');
 
-        // $pengeluaran = Pengeluaran::whereDate('created_at', $tanggal)
-        //     ->whereTime('created_at', '>=', '09:00:00')
-        //     ->whereTime('created_at', '<=', '18:00:00')
-        //     ->get();
-
-        $detailPengeluaran = DetailPengeluaran::whereDate('created_at', $tanggal)->get();
+        // Jika tanggal disediakan, lakukan filter berdasarkan tanggal
+        if ($tanggal) {
+            $detailPengeluaran = DetailPengeluaran::whereDate('created_at', $tanggal)->get();
+        } else {
+            // Jika tanggal tidak disediakan, ambil semua data pengeluaran
+            $detailPengeluaran = DetailPengeluaran::all();
+        }
 
         return view('dashboard.pengeluaran.detailPengeluaran', compact('tanggal', 'detailPengeluaran'), [
             'title' => 'Detail Pengeluaran'

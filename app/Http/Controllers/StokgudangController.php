@@ -6,12 +6,13 @@ use App\Models\Barang;
 use App\Models\DetailStokGudang;
 use App\Models\Gudang;
 use App\Models\StokGudang;
+use App\Models\TotalStokGudang;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 
 class StokgudangController extends Controller
 {
@@ -27,10 +28,21 @@ class StokgudangController extends Controller
     // }
     public function index()
     {
+        $gudangs = Gudang::all();
+        $barang = Barang::all();
+        $detailStokGudang = DetailStokGudang::all();
+        $stokgudangs = StokGudang::all();
+        return view('dashboard.stokGudang1.detail_StokGudang', compact('gudangs', 'barang', 'detailStokGudang', 'stokgudangs'), [
+            'title' => 'Detail Stok Gudang',
+        ]);
+    }
+    
+    public function indexx()
+    {
         $gudang = Gudang::all();
         $barang = Barang::all();
-        return view('dashboard.stokGudang1.index', compact('gudang', 'barang'), [
-            'title' => 'Stok Gudang',
+        return view('dashboard.stokGudang1.index', compact('gudang', 'barang',), [
+            'title' => 'Form Stok Gudang',
         ]);
     }
     
@@ -44,29 +56,31 @@ class StokgudangController extends Controller
         $stokGudang->save();
     
         // Daftar barang yang sudah ada di gudang ini
-        $existingBarangIds = DetailStokGudang::whereHas('stokgudang', function ($query) use ($data) {
+        DetailStokGudang::whereHas('stokgudang', function ($query) use ($data) {
             $query->where('gudang_id', $data['gudang_id']);
         })->pluck('barang_id')->toArray();
     
         // Loop melalui data barang dan stok
-        foreach ($data['barang_id'] as $item => $value) {
-            // Cek apakah barang sudah ada di gudang ini
-            if (in_array($value, $existingBarangIds)) {
-                return redirect()->back()->withInput()
-                    ->withErrors(['barang_id' => 'Barang dengan ID ' . $value . ' sudah ada di gudang ini'])
-                    ->with('existing_barang_id', $value)
-                    ->with('error', 'Gagal menambahkan barang karena barang sudah ada di gudang ini');
-            } else {
-                // Barang belum ada di gudang ini, maka simpan
-                $data2 = array(
-                    'stokgudang_id' => $stokGudang->id,
+        foreach ($data['barang_id'] as $item => $value) {          
+            // Simpan data stok barang
+            $data2 = array(
+                'stokgudang_id' => $stokGudang->id,
+                'barang_id' => $value,
+                'stok' => $data['stok'][$item]
+            );
+            DetailStokGudang::create($data2);
+
+            // Update total_stok_gudangs
+            TotalStokGudang::updateOrCreate(
+                [
                     'barang_id' => $value,
-                    'stok' => $data['stok'][$item]
-                );
-                DetailStokGudang::create($data2);
-            }
+                    'gudang_id' => $data['gudang_id']
+                ],
+                [
+                    'total_stok' => DB::raw('total_stok + ' . $data['stok'][$item])
+                ]
+            );
         }
-    
         return redirect()->back()->with('status', 'Data Berhasil di input');
         
         // Simpan infor
@@ -97,21 +111,22 @@ class StokgudangController extends Controller
 
     }
 
-    public function detail()
-    {
-        $stokgudang = StokGudang::all();
-        $gudangs = Gudang::all();
+    // public function detail()
+    // {
+    //     $stokgudang = StokGudang::all();
+    //     $gudangs = Gudang::all();
         
-        return view('dashboard.stokGudang1.detail', compact('stokgudang', 'gudangs'), [
-            'title' => 'Detail Stok Gudang',
-        ]);
-    }
+    //     return view('dashboard.stokGudang1.detail', compact('stokgudang', 'gudangs'), [
+    //         'title' => 'Detail Stok Gudang',
+    //     ]);
+    // }
     
     public function detailStokgudang($id)
     {
         $stokgudang = StokGudang::with('detail')->where('id', $id)->first();
+        $gudangs = Gudang::all();
 
-        return view('dashboard.stokGudang1.detail_stokgudang', compact('stokgudang'), [
+        return view('dashboard.stokGudang1.detail_stokgudang', compact('stokgudang', 'gudangs'), [
             'title' => 'Detail Data Stok Gudang',
         ]);
     }

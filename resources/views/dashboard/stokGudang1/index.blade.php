@@ -19,7 +19,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <form method="POST" action="/dashboard/stokgudang">
+                    <form method="POST" action="/dashboard/stokgudang/tambah">
                         @csrf
                         <div class="mb-3">
                             <label for="gudang" class="form-label">Gudang</label>
@@ -41,35 +41,22 @@
                             <tbody class="barang">
                                 <tr>
                                     <td>
-                                        <select name="barang_id[]" class="form-control" required>
+                                        <select name="barang_id[]" id="barangSelect" class="form-control" required>
                                             <option selected>Pilih Barang</option>
                                             @foreach($barang as $data)
-                                                <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                                <option value="{{ $data->id }}">
+                                                    {{ $data->kode_barang }} || {{ $data->nama }} || {{ $data->RRpemasok->nama }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td><input type="text" class="form-control" id="stok" name="stok[]" required></td>
+                                    <td><input type="number" class="form-control" id="stok" name="stok[]" required placeholder="Masukan Stok"></td>
                                     <td><a href="#" class="btn btn-info" id="addbarang">Tambah Barang</a></td>
                                 </tr>
                             </tbody>
-                            {{-- <div class="barang"></div> --}}
                         </table>
-                        {{-- <div class="mb-3">
-                            <label for="barang" class="form-label">Barang</label>
-                            <select name="barang_id[]" class="form-control">
-                                <option selected>Pilih Barang</option>
-                                @foreach($barang as $data)
-                                    <option value="{{ $data->id }}">{{ $data->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
-                        {{-- <div class="mb-3">
-                            <label for="stok" class="form-label">Stok</label>
-                            <input type="text" class="form-control" id="stok" name="stok[]" required>
-                        </div> --}}
-                        {{-- <a href="#" class="btn btn-info" id="addbarang">Tambah Barang</a> --}}
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="/dashboard/detail/stokgudang" class="btn btn-dark">Kembali</a>
+                        <a href="/dashboard/stokgudang" class="btn btn-dark">Kembali</a>
                     </form>
                 </div>
             </div>
@@ -89,7 +76,7 @@
             });
 
             function addbarang() {
-                let barang = '<tr><td><select name="barang_id[]" class="form-control"><option selected>Pilih Barang</option>@foreach($barang as $data)<option value="{{ $data->id }}">{{ $data->nama }}</option>@endforeach</select></td><td><input type="text" class="form-control" id="stok" name="stok[]" required></td><td><a href="#" class="btn btn-danger remove-barang">Remove</a></td></tr>';
+                let barang = '<tr><td><select name="barang_id[]" class="form-control"><option selected>Pilih Barang</option>@foreach($barang as $data)<option value="{{ $data->id }}">{{ $data->kode_barang }} || {{ $data->nama }} || {{ $data->RRpemasok->nama }}</option>@endforeach</select></td><td><input type="text" class="form-control" id="stok" name="stok[]" required placeholder="Masukan Stok"></td><td><a href="#" class="btn btn-danger remove-barang">Remove</a></td></tr>';
 
                 $('.barang').append(barang);
             }
@@ -97,6 +84,38 @@
             $(document).on('click', '.remove-barang', function (e) {
                 e.preventDefault();
                 $(this).closest('tr').remove();
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const stokInputs = document.querySelectorAll("input[name='stok[]']");
+
+            stokInputs.forEach(input => {
+                input.addEventListener("input", function () {
+                    const value = parseFloat(input.value);
+
+                    if (isNaN(value) || value <= 0) {
+                        input.value = "";
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const barangSelect = document.getElementById("barangSelect");
+            const kodeBarang = document.getElementById("kodeBarang");
+            const namaBarang = document.getElementById("namaBarang");
+            const namaPemasok = document.getElementById("namaPemasok");
+
+            barangSelect.addEventListener("change", function () {
+                const selectedOption = barangSelect.options[barangSelect.selectedIndex];
+                kodeBarang.textContent = selectedOption.getAttribute("data-kode");
+                namaBarang.textContent = selectedOption.getAttribute("data-nama");
+                namaPemasok.textContent = selectedOption.getAttribute("data-pemasok");
             });
         });
     </script>
@@ -152,7 +171,7 @@
         </form>
     </div> --}}
 
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></sc>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#addbarang').on('click', function (e) {

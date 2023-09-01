@@ -64,15 +64,17 @@
                                         <th>Kode Barang</th>
                                         <th>Nama Barang</th>
                                         <th>Jenis Barang</th>
+                                        <th>Harga Satuan</th>
                                         <th>Total Stok</th>
                                     </tr>
                                 </thead>
                                 <tbody>  
                                     @foreach ($totalStokToko as $item)
                                         <tr>
-                                            <td>{{ $item->detailStokGudang->barang->kode_barang }}</td>
-                                            <td>{{ $item->detailStokGudang->barang->nama }}</td>
-                                            <td>{{ $item->detailStokGudang->barang->jenisBarang->kategori_barang }}</td>
+                                            <td>{{ $item->barang->kode_barang }}</td>
+                                            <td>{{ $item->barang->nama }}</td>
+                                            <td>{{ $item->barang->jenisBarang->kategori_barang }}</td>
+                                            <td>Rp {{ number_format($item->barang->harga_jual, 2, ',', '.') }}</td>
                                             <td>{{ $item->total_stok }}</td>
                                         </tr>
                                     @endforeach

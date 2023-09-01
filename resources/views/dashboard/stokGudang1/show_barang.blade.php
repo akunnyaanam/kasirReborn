@@ -55,7 +55,7 @@
                     <div class="card">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>{{ $tableTitle }}
-                            <a href="/dashboard/detail/stokgudang" class="btn btn-dark" style="float: right;">Kembali</a>
+                            <a href="/dashboard/stokgudang" class="btn btn-dark" style="float: right;">Kembali</a>
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -63,33 +63,37 @@
                                     <tr>
                                         <th>Kode Barang</th>
                                         <th>Nama Barang</th>
+                                        {{-- <th>Gudang</th> --}}
+                                        <th>Jenis Barang</th>
+                                        <th>Pemasok</th>
+                                        <th>Harga Beli</th>
+                                        <th>Harga Jual</th>
                                         <th>Stok</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    @foreach ($gudang->stokGudangs as $stok)
-                                        @foreach ($stok->detail as $detil)
-                                            <tr>
-                                                @if ($detil->stok == 0)
-                                                    <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $detil->barang->kode_barang }}</h6></td>
-                                                    <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $detil->barang->nama }}</h6></td>
-                                                    <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">STOK KOSONG</h6></td>
-                                                @else
-                                                    <td><h6>{{ $detil->barang->kode_barang }}</h6></td>
-                                                    <td><h6>{{ $detil->barang->nama }}</h6></td>
-                                                    <td><h6>{{ $detil->stok }}</h6></td>
-                                                @endif
-                                                <td>
-                                                    <div class="btn-group btn-group-sm" role="group"
-                                                        aria-label="Small button group">
-                                                        <button type="submit" class="btn btn-warning btn-sm editStok" data-id="{{ $detil->id }}" data-toggle="modal" data-target="#editModal">
-                                                            <i class="fa-solid fa-plus"></i> Tambah Stok
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                    @foreach ($totalstokgudang as $data)
+                                        <tr>
+                                            @if ($data->total_stok == 0)
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $data->barang->kode_barang }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $data->barang->nama }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $data->barang->jenisBarang->kategori_barang }}</h6></td>
+                                                {{-- <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $data->gudang->nama }}</h6></td> --}}
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">{{ $data->barang->RRpemasok->nama }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">Rp {{ number_format($data->barang->harga_beli) }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">Rp {{ number_format($data->barang->harga_jual) }}</h6></td>
+                                                <td><h6 style="background-color: #dc3545; color: white; padding: 5px;">STOK KOSONG</h6></td>
+                                            @else
+                                                <td><h6>{{ $data->barang->kode_barang }}</h6></td>
+                                                <td><h6>{{ $data->barang->nama }}</h6></td>
+                                                {{-- <td><h6>{{ $data->gudang->nama }}</h6></td> --}}
+                                                <td><h6>{{ $data->barang->jenisBarang->kategori_barang }}</h6></td>
+                                                <td><h6>{{ $data->barang->RRpemasok->nama }}</h6></td>
+                                                <td><h6>Rp {{ number_format($data->barang->harga_beli) }}</h6></td>
+                                                <td><h6>Rp {{ number_format($data->barang->harga_jual) }}</h6></td>
+                                                <td><h6>{{ $data->total_stok }}</h6></td>
+                                            @endif
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

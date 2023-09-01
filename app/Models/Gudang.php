@@ -33,4 +33,9 @@ class Gudang extends Model
     {
         return $this->hasOne(Gudang::class);
     }
+
+    public function totalStokGudang()
+    {
+        return $this->hasMany(TotalStokGudang::class, 'gudang_id');
+    }
 }

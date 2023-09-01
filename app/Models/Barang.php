@@ -19,10 +19,10 @@ class Barang extends Model
         'stok'
     ];
 
-    public function detailMutasi()
-    {
-        return $this->hasMany(DetailMutasi::class, 'barang_id');
-    }
+    // public function detailMutasi()
+    // {
+    //     return $this->hasMany(DetailMutasi::class, 'barang_id');
+    // }
 
     public function stokGudang()
     {
@@ -66,4 +66,13 @@ class Barang extends Model
         return $this->hasMany(Barang::class);
     }
 
+    public function totalStokGudang()
+    {
+        return $this->hasMany(TotalStokGudang::class, 'barang_id');
+    }
+
+    public function totalStokToko()
+    {
+        return $this->hasMany(TotalStokToko::class, 'barang_id');
+    }
 }

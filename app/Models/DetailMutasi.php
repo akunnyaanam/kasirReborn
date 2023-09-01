@@ -14,15 +14,10 @@ class DetailMutasi extends Model
     {
         return $this->belongsTo(Mutasi::class, 'mutasi_id');
     }
-
-    public function barang()
+    
+    public function totalStokGudang()
     {
-        return $this->belongsTo(Barang::class, 'barang_id');
-    }
-
-    public function gudangAwal()
-    {
-        return $this->belongsTo(StokGudang::class, 'gudang_awal_id');
+        return $this->belongsTo(totalStokGudang::class, 'barang_id');
     }
 
     public function gudangTujuan()

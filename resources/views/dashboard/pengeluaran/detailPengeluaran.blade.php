@@ -54,7 +54,7 @@
                             <form action="{{ route('generate.pdf') }}" method="post" target="_blank">
                                 @csrf
                                 <input type="hidden" name="tanggal" value="{{ $tanggal }}">
-                                <button type="submit" class="btn btn-primary">Generate PDF</button>
+                                <button type="submit" class="btn btn-primary">Print</button>
                             </form>
                         </div>
                     </div>

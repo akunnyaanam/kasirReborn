@@ -56,7 +56,6 @@ class BarangController extends Controller
         
         $barang->kode_barang = $request->input('kode_barang');
         $barang->id_jenis_barang = $request->input('id_jenis_barang');
-        $barang->id_gudang = $request->input('id_gudang');
         $barang->id_pemasok = $request->input('id_pemasok');
         $barang->nama = $request->input('nama');
         $barang->harga_beli = $request->input('harga_beli');

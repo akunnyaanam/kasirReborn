@@ -14,6 +14,7 @@
             border-collapse: collapse;
             width: 100%;
             margin-top: 10px;
+            font-size: 5px;
         }
         .table-bordered th,
         .table-bordered td {
@@ -82,22 +83,26 @@
                     <th>No</th>
                     <th>Kode Barang</th>
                     <th>Nama Barang</th>
+                    <th>Pemasok</th>
                     <th>Gudang Asal</th>
                     <th>Gudang Tujuan</th>
                     <th>Jumlah Stok</th>
+                    <th>Waktu</th>
                     <th>Aksi</th>
                   </tr>
               </thead>
               <tbody>
                   @foreach ($mutasis->detailMutasi as $detailMutasis)
                   <tr>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $detailMutasis->barang->kode_barang }}</td>
-                      <td>{{ $detailMutasis->barang->nama }}</td>
-                      <td>{{ $detailMutasis->gudangAwal->gudang->nama }}</td>
-                      <td>{{ $detailMutasis->gudangTujuan->nama }}</td>
-                      <td>{{ $detailMutasis->jumlah_barang }}</td>
-                      <td></td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $detailMutasis->totalStokGudang->barang->kode_barang }}</td>
+                    <td>{{ $detailMutasis->totalStokGudang->barang->nama }}</td>
+                    <td>{{ $detailMutasis->totalStokGudang->barang->RRpemasok->nama }}</td>
+                    <td>{{ $detailMutasis->gudang_awal }}</td>
+                    <td>{{ $detailMutasis->gudangTujuan->nama }}</td>
+                    <td>{{ $detailMutasis->jumlah_barang }}</td>
+                    <td>{{ $detailMutasis->created_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }}</td>
+                    <td></td>
                   </tr>
                   @endforeach
               </tbody>

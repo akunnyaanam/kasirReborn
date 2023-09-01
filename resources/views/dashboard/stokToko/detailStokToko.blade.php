@@ -28,6 +28,29 @@
                 </thead>
                 <tbody>
                     @foreach ($stoktoko as $dataa)
+                        @if ($dataa->detailStokTokos)
+                            @foreach ($dataa->detailStokTokos as $index => $detailStok)
+                                <tr class="text-center align-middle">
+                                    @if ($index === 0)
+                                        <td rowspan="{{ count($dataa->detailStokTokos) }}">{{ $dataa->kode_suratjalan }}</td>
+                                        <td rowspan="{{ count($dataa->detailStokTokos) }}">{{ $dataa->toko->nama }}</td>
+                                    @endif
+                                    <td>{{ $detailStok->barang->barang->kode_barang }}</td>
+                                    <td>{{ $detailStok->barang->barang->nama }}</td>
+                                    <td>{{ $detailStok->barang->gudang->nama }}</td>
+                                    <td>{{ $detailStok->stok }}</td>
+                                    @if ($index === 0)
+                                        <td rowspan="{{ count($dataa->detailStokTokos) }}" class="text-center align-middle">
+                                            <a href="{{ route('cetak.pdf', ['id' => $dataa->id, 'ukuran' => 'a4']) }}" class="btn btn-primary" target="_blank">Cetak A4</a>
+                                            <a href="{{ route('cetak.pdf', ['id' => $dataa->id, 'ukuran' => 'a6']) }}" class="btn btn-primary" target="_blank">Cetak A6</a>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        @endif
+                    @endforeach
+
+                    {{-- @foreach ($stoktoko as $dataa)
                         <tr>
                             @if ($dataa->detailStokTokos)
                                 <td rowspan="{{ count($dataa->detailStokTokos) }}" class="text-center align-middle">{{ $dataa->kode_suratjalan }}</td>
@@ -52,49 +75,9 @@
                                 @endforeach
                             @endif
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>                                   
-            
-             {{-- <table class="table table-bordered mt-3">
-                <thead>
-                    <tr class="text-center">
-                        <th>Kode Surat Jalan</th>
-                        <th>Toko Tujuan</th>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th>Gudang</th>
-                        <th>Stok Kirim</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($stoktoko as $dataa)
-                        <tr>
-                            <td class="text-center align-middle">{{ $dataa->kode_suratjalan }}</td>
-                            <td class="text-center align-middle">{{ $dataa->toko->nama }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        @foreach ($dataa->detailStokToko as $detailStok)
-                            @foreach ($detailStok->historiDetailStokToko as $histori)
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>{{ $detailStok->barang->barang->kode_barang }}</td>
-                                    <td>{{ $detailStok->barang->barang->nama }}</td>
-                                    <td>{{ $detailStok->barang->stokgudang->gudang->nama }}</td>
-                                    <td>{{ $histori->stok }}</td>
-                                </tr>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-
-                </tbody>
-                    
-            </table> --}}
         </div>
     </main>
 </div>
